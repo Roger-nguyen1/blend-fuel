@@ -9,8 +9,7 @@ function Home() {
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      // La touche "Entrée" a été pressée, vous pouvez exécuter votre fonction ici.
-      // Par exemple, vous pouvez appeler une fonction de recherche ou effectuer une action souhaitée.
+      const result = searchCity(inputSearch);
       console.log("Touche Entrée pressée");
     }
   };
