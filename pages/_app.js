@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "daisyui/dist/full.css";
 import Head from "next/head";
 
 function App({ Component, pageProps }) {
