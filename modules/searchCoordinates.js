@@ -6,7 +6,6 @@ export function searchCoordinates(coordinates) {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        data = newDatas;
       })
       .catch((error) => console.error("Erreur:", error));
   }
