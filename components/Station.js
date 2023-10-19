@@ -3,22 +3,23 @@ import React from "react";
 function Station(props) {
   const fuelsData = props.fuels;
 
-  const fuelsToDisplay = fuelsData.map((data, i) => {
-    return (
-      <div>
-        <p>{data.name}</p>
-        <p>{data.Price.value}€</p>
-      </div>
-    );
-  });
-
   return (
-    <div className="border-2">
+    <div className="border-2 m-2.5">
       <div>
-        <p>{props.brand}</p>
-        <p>{props.name}</p>
+        <p>Station : {props.brand}</p>
+        <p>Nom : {props.name}</p>
       </div>
-      <div>{fuelsToDisplay}</div>
+      <div>
+        {fuelsData.map((data, i) => (
+          <div key={i}>
+            <p>
+              {data.name} || Mis à jour le {data.Update.text}
+            </p>
+            <p>{data.Price.value}€</p>
+          </div>
+        ))}
+      </div>
+      <p>------------------------------</p>
     </div>
   );
 }
