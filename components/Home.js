@@ -7,32 +7,25 @@ import NavBar from "../components/NavBar";
 
 function Home() {
   const [inputSearch, setInputSearch] = useState("");
-  const [stationsData, setStationsData] = useState(null);
+  const [stationsData, setStationsData] = useState([]);
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = async (e) => {
     if (e.key === "Enter") {
-      const result = searchCity(inputSearch);
-      console.log("Touche Entrée pressée");
-      if (result) {
-        setStationsData(result);
+      const result = await searchCity(inputSearch);
+      console.log("Touche Entrée pressée avec la valeur " + inputSearch);
+      //console.log(result);
+
+      setStationsData(result);
+      setTimeout(() => {
         console.log(stationsData);
-      }
+      }, 6000);
     }
   };
 
   //mise à jour des stations avec stationsData.map
   const stations = stationsData.map((data, i) => {
     return (
-      <Station
-        key={i}
-        updateLikedMovies={updateLikedMovies}
-        isLiked={isLiked}
-        title={data.title}
-        overview={tronquerTexte(data.overview, 250)}
-        poster={`${posterUrl}${data.poster_path}`}
-        voteAverage={data.vote_average}
-        voteCount={data.vote_count}
-      />
+      <Station key={i} brand={data.Brand} fuels={data.Fuels} name={data.name} />
     );
   });
 
@@ -52,11 +45,9 @@ function Home() {
             onKeyDown={handleKeyPress}
             required
           />
-
-          <p>du texte PAS ICI</p>
           <button className="btn btn-accent">Rechercher</button>
         </div>
-        {/* <div>{stations}</div> */}
+        <div>{stations}</div>
       </main>
     </div>
   );

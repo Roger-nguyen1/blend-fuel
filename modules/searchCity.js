@@ -1,4 +1,4 @@
-export function searchCity(city) {
+export async function searchCity(city) {
   const apiStations = "https://api.prix-carburants.2aaz.fr/stations/?q=";
   const apiById = `https://api.prix-carburants.2aaz.fr/station/`;
   let arrayOfId;
@@ -6,7 +6,7 @@ export function searchCity(city) {
   const newDatasWithPrice = [];
 
   //Recherche des stations avec création d'un tableaux d'id, et recherche des prix des carburants
-  fetch(apiStations + city)
+  await fetch(apiStations + city)
     .then((response) => response.json())
     .then((data) => {
       arrayOfId = data.map((item) => item.id);
