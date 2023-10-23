@@ -9,6 +9,9 @@ import NavBar from "../components/NavBar";
 function Home() {
   const [inputSearch, setInputSearch] = useState("");
   const [stationsData, setStationsData] = useState([]);
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+  const [city, setCity] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [rangeSp95, setRangeSp95] = useState(0);
   const [rangeSp98, setRangeSp98] = useState(0);
@@ -22,6 +25,35 @@ function Home() {
       setInputSearch(""); // Efface le contenu de l'input
     }, 500);
   }, [stationsData]);
+
+  useEffect(() => {
+    const geocoder = new google.maps.Geocoder(); //Il faut installer l'api google map et enregistrer l'api key...
+
+    const request = {
+      latLng: {
+        lat: latitude,
+        lng: longitude,
+      },
+    };
+
+    geocoder.geocode(request, (results, status) => {
+      if (status === "OK") {
+        setCity(results[0].address_components[0].short_name);
+      }
+    });
+  }, [latitude, longitude]);
+
+  const handleGetLocation = () => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setLatitude(position.coords.latitude);
+        setLongitude(position.coords.longitude);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
 
   const handleKeyPress = async (e) => {
     if (e.key === "Enter") {
@@ -61,6 +93,15 @@ function Home() {
             onKeyDown={handleKeyPress}
             required
           />
+          <div>
+            <h1>Coordonnées GPS</h1>
+            <button className="btn btn-accent" onClick={handleGetLocation}>
+              Récupérer les coordonnées
+            </button>
+            <p>Latitude : {latitude}</p>
+            <p>Longitude : {longitude}</p>
+            <p>Ville : {city}</p>
+          </div>
           <button className="btn btn-accent">Rechercher</button>
         </div>
         <div>

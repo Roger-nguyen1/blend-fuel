@@ -10,7 +10,7 @@ export async function searchCity(city) {
     if (!fetchId && !newDatasWithPrice) {
       return console.log("No data Found for blending E85!");
     } else {
-      const fuelsArr = newDatasWithPrice.Fuels;
+      const fuelsArr = fuels;
     }
   }
 
@@ -25,19 +25,21 @@ export async function searchCity(city) {
       //Requêtes par id et créations des données des stations
       if (fetchId) {
         for (let i = 0; i < arrayOfId.length; i++) {
-          fetch(apiById + arrayOfId[i])
-            .then((response) => response.json())
-            .then((data) => {
-              const dataModified = {
-                id: data.id,
-                Brand: data.Brand.name,
-                name: data.name,
-                Fuels: data.Fuels,
-              };
-              //console.log(dataModified);
-              newDatasWithPrice.push(dataModified);
-              console.log(newDatasWithPrice);
-            });
+          setTimeout(() => {
+            fetch(apiById + arrayOfId[i])
+              .then((response) => response.json())
+              .then((data) => {
+                const dataModified = {
+                  id: data.id,
+                  Brand: data.Brand.name,
+                  name: data.name,
+                  Fuels: data.Fuels,
+                };
+                //console.log(dataModified);
+                newDatasWithPrice.push(dataModified);
+                console.log(newDatasWithPrice);
+              });
+          }, 250);
         }
       }
     })
