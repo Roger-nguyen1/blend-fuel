@@ -64,7 +64,7 @@ function Home() {
           <button className="btn btn-accent">Rechercher</button>
         </div>
         <div>
-          <label for="sp95">SP95 : {rangeSp95} L</label>
+          <label for="sp95">SP95-E10 : {rangeSp95} L</label>
           <input
             type="range"
             min={0}

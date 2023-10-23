@@ -5,6 +5,15 @@ export async function searchCity(city) {
   let fetchId = false;
   const newDatasWithPrice = [];
 
+  //Fonction de calcul somme total mélange carburants Super(95 ou 98) et E85
+  function blend(fuels) {
+    if (!fetchId && !newDatasWithPrice) {
+      return console.log("No data Found for blending E85!");
+    } else {
+      const fuelsArr = newDatasWithPrice.Fuels;
+    }
+  }
+
   //Recherche des stations avec création d'un tableaux d'id, et recherche des prix des carburants
   await fetch(apiStations + city)
     .then((response) => response.json())
@@ -27,7 +36,7 @@ export async function searchCity(city) {
               };
               //console.log(dataModified);
               newDatasWithPrice.push(dataModified);
-              //console.log(newDatasWithPrice);
+              console.log(newDatasWithPrice);
             });
         }
       }
