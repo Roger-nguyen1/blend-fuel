@@ -10,6 +10,9 @@ function Home() {
   const [inputSearch, setInputSearch] = useState("");
   const [stationsData, setStationsData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [rangeSp95, setRangeSp95] = useState(0);
+  const [rangeSp98, setRangeSp98] = useState(0);
+  const [rangeE85, setRangeE85] = useState(0);
 
   useEffect(() => {
     // Cette fonction sera appelée chaque fois que stationsData change
@@ -59,6 +62,35 @@ function Home() {
             required
           />
           <button className="btn btn-accent">Rechercher</button>
+        </div>
+        <div>
+          <label for="sp95">SP95 : {rangeSp95} L</label>
+          <input
+            type="range"
+            min={0}
+            max="100"
+            onChange={(e) => setRangeSp95(e.target.value)}
+            value={rangeSp95}
+            className="range"
+          />
+          <label for="sp98">SP98: {rangeSp98} L</label>
+          <input
+            type="range"
+            min={0}
+            max="100"
+            onChange={(e) => setRangeSp98(e.target.value)}
+            value={rangeSp98}
+            className="range range-success"
+          />
+          <label for="E85">E85: {rangeE85} L</label>
+          <input
+            type="range"
+            min={0}
+            max="100"
+            onChange={(e) => setRangeE85(e.target.value)}
+            value={rangeE85}
+            className="range range-info"
+          />
         </div>
         {isLoading ? (
           <div>
