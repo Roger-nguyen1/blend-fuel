@@ -1,8 +1,9 @@
-//import styles from "../styles/Home.module.css";
+import styles from "../styles/Home.module.css";
 import "tailwindcss/tailwind.css";
 import { useState, useEffect } from "react";
 import { searchCity } from "../modules/searchCity";
 import { searchCoordinates } from "../modules/searchCoordinates";
+import { Modal } from "antd";
 import Station from "../components/Station";
 import NavBar from "../components/NavBar";
 
@@ -13,6 +14,7 @@ function Home() {
   const [longitude, setLongitude] = useState(null);
   const [city, setCity] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [modalOn, setModalOn] = useState(false);
   const [rangeSp95, setRangeSp95] = useState(0);
   const [rangeSp98, setRangeSp98] = useState(0);
   const [rangeE85, setRangeE85] = useState(0);
@@ -27,20 +29,14 @@ function Home() {
   }, [stationsData]);
 
   useEffect(() => {
-    const geocoder = new google.maps.Geocoder(); //Il faut installer l'api google map et enregistrer l'api key...
-
-    const request = {
-      latLng: {
-        lat: latitude,
-        lng: longitude,
-      },
-    };
-
-    geocoder.geocode(request, (results, status) => {
-      if (status === "OK") {
-        setCity(results[0].address_components[0].short_name);
-      }
-    });
+    if (latitude && longitude) {
+      fetch(`https://geocode.maps.co/reverse?lat=${latitude}&lon=${longitude}`)
+        .then((response) => response.json())
+        .then((data) => {
+          const geoCity = data.address.city;
+          geoCity && setCity(geoCity);
+        });
+    }
   }, [latitude, longitude]);
 
   const handleGetLocation = () => {
@@ -57,15 +53,25 @@ function Home() {
 
   const handleKeyPress = async (e) => {
     if (e.key === "Enter") {
-      setIsLoading(true); // Affiche un message de chargement
-      const result = await searchCity(inputSearch);
-      console.log("Touche Entrée pressée avec la valeur " + inputSearch);
-      //console.log(result);
-      if (result) {
-        setStationsData(result);
-        stationsData && setIsLoading(false);
+      if (rangeE85 === 0 && inputSearch) {
+        showModal();
+
+        setInputSearch("");
+      } else if (rangeE85 >= 1) {
+        setIsLoading(true); // Affiche un message de chargement
+        const result = await searchCity(inputSearch);
+        console.log("Touche Entrée pressée avec la valeur " + inputSearch);
+        //console.log(result);
+        if (result) {
+          setStationsData(result);
+          stationsData && setIsLoading(false);
+        }
       }
     }
+  };
+
+  const showModal = () => {
+    setModalOn(true);
   };
 
   //mise à jour des stations avec stationsData.map
@@ -105,30 +111,35 @@ function Home() {
           <button className="btn btn-accent">Rechercher</button>
         </div>
         <div>
-          <label for="sp95">SP95-E10 : {rangeSp95} L</label>
+          <p>___________________________________________</p>
+          <p>Choisissez la quantité de carburants* : </p>
+          <label>SP95-E10 : {rangeSp95} L</label>
           <input
             type="range"
             min={0}
-            max="100"
+            max="45"
             onChange={(e) => setRangeSp95(e.target.value)}
             value={rangeSp95}
             className="range"
           />
-          <label for="sp98">SP98: {rangeSp98} L</label>
+          <label>SP98: {rangeSp98} L</label>
           <input
             type="range"
             min={0}
-            max="100"
+            max="45"
             onChange={(e) => setRangeSp98(e.target.value)}
             value={rangeSp98}
             className="range range-success"
           />
-          <label for="E85">E85: {rangeE85} L</label>
+          <label>E85: {rangeE85} L</label>
           <input
             type="range"
             min={0}
-            max="100"
-            onChange={(e) => setRangeE85(e.target.value)}
+            max="45"
+            onChange={(e) => {
+              setRangeE85(e.target.value);
+              console.log(e.target.value);
+            }}
             value={rangeE85}
             className="range range-info"
           />
@@ -140,6 +151,16 @@ function Home() {
         ) : (
           <div>{stations}</div>
         )}
+        <div>
+          <Modal
+            title="Hello!"
+            onCancel={() => setModalOn(false)}
+            open={modalOn}
+            footer={null}
+          >
+            <h1>La quantité de carburant E85 ne peut être à 0 litre.</h1>
+          </Modal>
+        </div>
       </main>
     </div>
   );
