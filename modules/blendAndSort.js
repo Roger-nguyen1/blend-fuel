@@ -1,374 +1,430 @@
-const stationsArr = [
-  {
-    id: 13710001,
-    Brand: {
-      id: 1,
-      name: "TotalEnergies",
-      short_name: "total",
-      nb_stations: 1614,
-    },
-    type: "R",
-    name: "TOTAL FUVEAU",
-    Address: {
-      street_line: "CD6 ZAC SAINT CHARLES",
-      city_line: "13710 Fuveau",
-    },
-    Coordinates: {
-      latitude: "43.466",
-      longitude: "5.606",
-    },
-    Hours: {
-      automate_24_7: true,
-      Days: [
-        {
-          day: 1,
-          name: "Lundi",
-          status: "open",
-          TimeSlots: [
-            {
-              opening_time: "06:30:00",
-              closing_time: "20:00:00",
-            },
-          ],
-        },
-        {
-          day: 2,
-          name: "Mardi",
-          status: "open",
-          TimeSlots: [
-            {
-              opening_time: "06:30:00",
-              closing_time: "20:00:00",
-            },
-          ],
-        },
-        {
-          day: 3,
-          name: "Mercredi",
-          status: "open",
-          TimeSlots: [
-            {
-              opening_time: "06:30:00",
-              closing_time: "20:00:00",
-            },
-          ],
-        },
-        {
-          day: 4,
-          name: "Jeudi",
-          status: "open",
-          TimeSlots: [
-            {
-              opening_time: "06:30:00",
-              closing_time: "20:00:00",
-            },
-          ],
-        },
-        {
-          day: 5,
-          name: "Vendredi",
-          status: "open",
-          TimeSlots: [
-            {
-              opening_time: "06:30:00",
-              closing_time: "20:00:00",
-            },
-          ],
-        },
-        {
-          day: 6,
-          name: "Samedi",
-          status: "open",
-          TimeSlots: [
-            {
-              opening_time: "06:30:00",
-              closing_time: "13:00:00",
-            },
-          ],
-        },
-        {
-          day: 7,
-          name: "Dimanche",
-          status: "closed",
-        },
-      ],
-    },
-    Services: [
-      "Station de gonflage",
-      "Piste poids lourds",
-      "Lavage automatique",
-      "Lavage manuel",
-      "Vente de gaz domestique (Butane, Propane)",
-      "Automate CB 24/24",
-      "DAB (Distributeur automatique de billets)",
-      "Location de véhicule",
-      "Toilettes publiques",
-      "Relais colis",
-      "Boutique alimentaire",
-      "Boutique non alimentaire",
-      "Services réparation / entretien",
-      "Wifi",
-      "Carburant additivé",
-      "Vente d'additifs carburants",
-      "Vente de fioul domestique",
-    ],
-    Fuels: [
-      {
-        id: 1,
-        name: "Gazole",
-        short_name: "Gazole",
-        picto: "B7",
-        Update: {
-          value: "2023-10-24T06:33:37Z",
-          text: "24/10/2023 06:33:37",
-        },
-        available: true,
-        Price: {
-          value: 1.93,
-          currency: "EUR",
-          text: "1.93 €",
-        },
-      },
-      {
-        id: 3,
-        name: "Super Ethanol E85",
-        short_name: "E85",
-        picto: "E85",
-        Update: {
-          value: "2023-10-24T06:33:38Z",
-          text: "24/10/2023 06:33:38",
-        },
-        available: true,
-        Price: {
-          value: 1.039,
-          currency: "EUR",
-          text: "1.039 €",
-        },
-      },
-      {
-        id: 5,
-        name: "Super Sans Plomb 95 E10",
-        short_name: "SP95-E10",
-        picto: "E10",
-        Update: {
-          value: "2023-10-24T06:33:38Z",
-          text: "24/10/2023 06:33:38",
-        },
-        available: true,
-        Price: {
-          value: 1.858,
-          currency: "EUR",
-          text: "1.858 €",
-        },
-      },
-      {
-        id: 6,
-        name: "Super Sans Plomb 98",
-        short_name: "SP98",
-        picto: "E5",
-        Update: {
-          value: "2023-10-24T06:33:38Z",
-          text: "24/10/2023 06:33:38",
-        },
-        available: true,
-        Price: {
-          value: 1.968,
-          currency: "EUR",
-          text: "1.968 €",
-        },
-      },
-      {
-        id: 4,
-        name: "GPLc",
-        short_name: "GPLc",
-        picto: "LPG",
-        Update: {
-          value: "2023-10-24T06:33:38Z",
-          text: "24/10/2023 06:33:38",
-        },
-        available: true,
-        Price: {
-          value: 0.88,
-          currency: "EUR",
-          text: "0.88 €",
-        },
-      },
-    ],
-    LastUpdate: {
-      value: "2023-10-24T06:33:38Z",
-      text: "24/10/2023 06:33:38",
-    },
-  },
-  {
-    id: 13710002,
-    Brand: {
-      id: 49,
-      name: "Esso Express",
-      short_name: "essoexpress",
-      nb_stations: 322,
-    },
-    type: "R",
-    name: "ESSO 4 CHEMINS",
-    Address: {
-      street_line: "RN 96 LES 4 CHEMINS LA BARQUE",
-      city_line: "13710 Fuveau",
-    },
-    Coordinates: {
-      latitude: "43.478412946922",
-      longitude: "5.5376663126613",
-    },
-    Hours: {
-      automate_24_7: false,
-      Days: [],
-    },
-    Services: [],
-    Fuels: [
-      {
-        id: 1,
-        name: "Gazole",
-        short_name: "Gazole",
-        picto: "B7",
-        Update: {
-          value: "2023-10-23T05:31:00Z",
-          text: "23/10/2023 05:31:00",
-        },
-        available: true,
-        Price: {
-          value: 1.876,
-          currency: "EUR",
-          text: "1.876 €",
-        },
-      },
-      {
-        id: 3,
-        name: "Super Ethanol E85",
-        short_name: "E85",
-        picto: "E85",
-        Update: {
-          value: "2023-10-23T05:31:00Z",
-          text: "23/10/2023 05:31:00",
-        },
-        available: true,
-        Price: {
-          value: 1.109,
-          currency: "EUR",
-          text: "1.109 €",
-        },
-      },
-      {
-        id: 5,
-        name: "Super Sans Plomb 95 E10",
-        short_name: "SP95-E10",
-        picto: "E10",
-        Update: {
-          value: "2023-10-23T05:31:00Z",
-          text: "23/10/2023 05:31:00",
-        },
-        available: true,
-        Price: {
-          value: 1.868,
-          currency: "EUR",
-          text: "1.868 €",
-        },
-      },
-      {
-        id: 6,
-        name: "Super Sans Plomb 98",
-        short_name: "SP98",
-        picto: "E5",
-        Update: {
-          value: "2023-10-23T05:31:00Z",
-          text: "23/10/2023 05:31:00",
-        },
-        available: true,
-        Price: {
-          value: 1.948,
-          currency: "EUR",
-          text: "1.948 €",
-        },
-      },
-    ],
-    LastUpdate: {
-      value: "2023-10-23T05:31:00Z",
-      text: "23/10/2023 05:31:00",
-    },
-  },
-  {
-    id: 13710003,
-    Brand: {
-      id: 29,
-      name: "Casino",
-      short_name: "casino",
-      nb_stations: 172,
-    },
-    type: "R",
-    name: "CASINO SUPERMARCHE",
-    Address: {
-      street_line: "Lotissement Grand Vallat",
-      city_line: "13710 Fuveau",
-    },
-    Coordinates: {
-      latitude: "43.451668013708",
-      longitude: "5.55591372243",
-    },
-    Hours: {
-      automate_24_7: true,
-      Days: [],
-    },
-    Services: [
-      "Vente de gaz domestique (Butane, Propane)",
-      "Automate CB 24/24",
-      "DAB (Distributeur automatique de billets)",
-    ],
-    Fuels: [
-      {
-        id: 1,
-        name: "Gazole",
-        short_name: "Gazole",
-        picto: "B7",
-        Update: {
-          value: "2023-10-17T08:10:17Z",
-          text: "17/10/2023 08:10:17",
-        },
-        available: true,
-        Price: {
-          value: 1.999,
-          currency: "EUR",
-          text: "1.999 €",
-        },
-      },
-      {
-        id: 5,
-        name: "Super Sans Plomb 95 E10",
-        short_name: "SP95-E10",
-        picto: "E10",
-        Update: {
-          value: "2023-10-17T08:10:17Z",
-          text: "17/10/2023 08:10:17",
-        },
-        available: true,
-        Price: {
-          value: 1.959,
-          currency: "EUR",
-          text: "1.959 €",
-        },
-      },
-    ],
-    LastUpdate: {
-      value: "2023-10-17T08:10:17Z",
-      text: "17/10/2023 08:10:17",
-    },
-  },
-];
+// const stationsEx = [
+//   {
+//     id: 13400001,
+//     Brand: "Auchan",
+//     name: "AUCHAN",
+//     Fuels: [
+//       {
+//         id: 1,
+//         name: "Gazole",
+//         short_name: "Gazole",
+//         picto: "B7",
+//         Update: {
+//           value: "2023-10-24T07:14:12Z",
+//           text: "24/10/2023 07:14:12",
+//         },
+//         available: true,
+//         Price: {
+//           value: 1.885,
+//           currency: "EUR",
+//           text: "1.885 €",
+//         },
+//       },
+//       {
+//         id: 3,
+//         name: "Super Ethanol E85",
+//         short_name: "E85",
+//         picto: "E85",
+//         Update: {
+//           value: "2023-10-20T06:36:51Z",
+//           text: "20/10/2023 06:36:51",
+//         },
+//         available: true,
+//         Price: {
+//           value: 0.975,
+//           currency: "EUR",
+//           text: "0.975 €",
+//         },
+//       },
+//       {
+//         id: 5,
+//         name: "Super Sans Plomb 95 E10",
+//         short_name: "SP95-E10",
+//         picto: "E10",
+//         Update: {
+//           value: "2023-10-24T07:14:12Z",
+//           text: "24/10/2023 07:14:12",
+//         },
+//         available: true,
+//         Price: {
+//           value: 1.799,
+//           currency: "EUR",
+//           text: "1.799 €",
+//         },
+//       },
+//       {
+//         id: 6,
+//         name: "Super Sans Plomb 98",
+//         short_name: "SP98",
+//         picto: "E5",
+//         Update: {
+//           value: "2023-10-24T07:14:13Z",
+//           text: "24/10/2023 07:14:13",
+//         },
+//         available: true,
+//         Price: {
+//           value: 1.859,
+//           currency: "EUR",
+//           text: "1.859 €",
+//         },
+//       },
+//       {
+//         id: 4,
+//         name: "GPLc",
+//         short_name: "GPLc",
+//         picto: "LPG",
+//         Update: {
+//           value: "2023-05-26T13:58:58Z",
+//           text: "26/05/2023 13:58:58",
+//         },
+//         available: true,
+//         Price: {
+//           value: 0.955,
+//           currency: "EUR",
+//           text: "0.955 €",
+//         },
+//       },
+//     ],
+//   },
+//   {
+//     id: 13400015,
+//     Brand: "TotalEnergies",
+//     name: "Station et Services des Paluds",
+//     Fuels: [
+//       {
+//         id: 1,
+//         name: "Gazole",
+//         short_name: "Gazole",
+//         picto: "B7",
+//         Update: {
+//           value: "2023-10-24T11:26:06Z",
+//           text: "24/10/2023 11:26:06",
+//         },
+//         available: true,
+//         Price: {
+//           value: 1.967,
+//           currency: "EUR",
+//           text: "1.967 €",
+//         },
+//       },
+//       {
+//         id: 5,
+//         name: "Super Sans Plomb 95 E10",
+//         short_name: "SP95-E10",
+//         picto: "E10",
+//         Update: {
+//           value: "2023-10-24T11:26:07Z",
+//           text: "24/10/2023 11:26:07",
+//         },
+//         available: true,
+//         Price: {
+//           value: 1.914,
+//           currency: "EUR",
+//           text: "1.914 €",
+//         },
+//       },
+//       {
+//         id: 6,
+//         name: "Super Sans Plomb 98",
+//         short_name: "SP98",
+//         picto: "E5",
+//         Update: {
+//           value: "2023-10-24T11:26:07Z",
+//           text: "24/10/2023 11:26:07",
+//         },
+//         available: true,
+//         Price: {
+//           value: 1.99,
+//           currency: "EUR",
+//           text: "1.99 €",
+//         },
+//       },
+//     ],
+//   },
+//   {
+//     id: 13400009,
+//     Brand: "Casino",
+//     name: "CASINO SUPERMARCHE",
+//     Fuels: [
+//       {
+//         id: 1,
+//         name: "Gazole",
+//         short_name: "Gazole",
+//         picto: "B7",
+//         Update: {
+//           value: "2023-10-21T07:11:34Z",
+//           text: "21/10/2023 07:11:34",
+//         },
+//         available: true,
+//         Price: {
+//           value: 1.929,
+//           currency: "EUR",
+//           text: "1.929 €",
+//         },
+//       },
+//       {
+//         id: 5,
+//         name: "Super Sans Plomb 95 E10",
+//         short_name: "SP95-E10",
+//         picto: "E10",
+//         Update: {
+//           value: "2023-10-21T07:11:34Z",
+//           text: "21/10/2023 07:11:34",
+//         },
+//         available: true,
+//         Price: {
+//           value: 1.819,
+//           currency: "EUR",
+//           text: "1.819 €",
+//         },
+//       },
+//       {
+//         id: 6,
+//         name: "Super Sans Plomb 98",
+//         short_name: "SP98",
+//         picto: "E5",
+//         Update: {
+//           value: "2023-10-21T07:11:35Z",
+//           text: "21/10/2023 07:11:35",
+//         },
+//         available: true,
+//         Price: {
+//           value: 1.899,
+//           currency: "EUR",
+//           text: "1.899 €",
+//         },
+//       },
+//     ],
+//   },
+//   {
+//     id: 13400014,
+//     Brand: "TotalEnergies",
+//     name: "RELAIS PIN VERT",
+//     Fuels: [
+//       {
+//         id: 1,
+//         name: "Gazole",
+//         short_name: "Gazole",
+//         picto: "B7",
+//         Update: {
+//           value: "2023-10-23T21:00:00Z",
+//           text: "23/10/2023 21:00:00",
+//         },
+//         available: true,
+//         Price: {
+//           value: 1.957,
+//           currency: "EUR",
+//           text: "1.957 €",
+//         },
+//       },
+//       {
+//         id: 3,
+//         name: "Super Ethanol E85",
+//         short_name: "E85",
+//         picto: "E85",
+//         Update: {
+//           value: "2023-10-23T21:00:00Z",
+//           text: "23/10/2023 21:00:00",
+//         },
+//         available: true,
+//         Price: {
+//           value: 0.994,
+//           currency: "EUR",
+//           text: "0.994 €",
+//         },
+//       },
+//       {
+//         id: 5,
+//         name: "Super Sans Plomb 95 E10",
+//         short_name: "SP95-E10",
+//         picto: "E10",
+//         Update: {
+//           value: "2023-10-23T21:00:00Z",
+//           text: "23/10/2023 21:00:00",
+//         },
+//         available: true,
+//         Price: {
+//           value: 1.904,
+//           currency: "EUR",
+//           text: "1.904 €",
+//         },
+//       },
+//       {
+//         id: 6,
+//         name: "Super Sans Plomb 98",
+//         short_name: "SP98",
+//         picto: "E5",
+//         Update: {
+//           value: "2023-10-23T21:00:00Z",
+//           text: "23/10/2023 21:00:00",
+//         },
+//         available: true,
+//         Price: {
+//           value: 1.99,
+//           currency: "EUR",
+//           text: "1.99 €",
+//         },
+//       },
+//     ],
+//   },
+//   {
+//     id: 13400007,
+//     Brand: "Esso Express",
+//     name: "ESSO LA DEMANDE",
+//     Fuels: [
+//       {
+//         id: 1,
+//         name: "Gazole",
+//         short_name: "Gazole",
+//         picto: "B7",
+//         Update: {
+//           value: "2023-10-24T05:31:00Z",
+//           text: "24/10/2023 05:31:00",
+//         },
+//         available: true,
+//         Price: {
+//           value: 1.889,
+//           currency: "EUR",
+//           text: "1.889 €",
+//         },
+//       },
+//       {
+//         id: 3,
+//         name: "Super Ethanol E85",
+//         short_name: "E85",
+//         picto: "E85",
+//         Update: {
+//           value: "2023-10-24T05:31:00Z",
+//           text: "24/10/2023 05:31:00",
+//         },
+//         available: true,
+//         Price: {
+//           value: 1.019,
+//           currency: "EUR",
+//           text: "1.019 €",
+//         },
+//       },
+//       {
+//         id: 5,
+//         name: "Super Sans Plomb 95 E10",
+//         short_name: "SP95-E10",
+//         picto: "E10",
+//         Update: {
+//           value: "2023-10-24T05:31:00Z",
+//           text: "24/10/2023 05:31:00",
+//         },
+//         available: true,
+//         Price: {
+//           value: 1.869,
+//           currency: "EUR",
+//           text: "1.869 €",
+//         },
+//       },
+//       {
+//         id: 6,
+//         name: "Super Sans Plomb 98",
+//         short_name: "SP98",
+//         picto: "E5",
+//         Update: {
+//           value: "2023-10-24T05:31:00Z",
+//           text: "24/10/2023 05:31:00",
+//         },
+//         available: true,
+//         Price: {
+//           value: 1.949,
+//           currency: "EUR",
+//           text: "1.949 €",
+//         },
+//       },
+//     ],
+//   },
+//   {
+//     id: 13400003,
+//     Brand: "TotalEnergies",
+//     name: "SARL STATION ET SCES CAMP",
+//     Fuels: [
+//       {
+//         id: 1,
+//         name: "Gazole",
+//         short_name: "Gazole",
+//         picto: "B7",
+//         Update: {
+//           value: "2023-10-21T07:18:47Z",
+//           text: "21/10/2023 07:18:47",
+//         },
+//         available: true,
+//         Price: {
+//           value: 1.947,
+//           currency: "EUR",
+//           text: "1.947 €",
+//         },
+//       },
+//       {
+//         id: 3,
+//         name: "Super Ethanol E85",
+//         short_name: "E85",
+//         picto: "E85",
+//         Update: {
+//           value: "2023-10-14T08:09:06Z",
+//           text: "14/10/2023 08:09:06",
+//         },
+//         available: true,
+//         Price: {
+//           value: 0.994,
+//           currency: "EUR",
+//           text: "0.994 €",
+//         },
+//       },
+//       {
+//         id: 5,
+//         name: "Super Sans Plomb 95 E10",
+//         short_name: "SP95-E10",
+//         picto: "E10",
+//         Update: {
+//           value: "2023-10-21T07:18:47Z",
+//           text: "21/10/2023 07:18:47",
+//         },
+//         available: true,
+//         Price: {
+//           value: 1.892,
+//           currency: "EUR",
+//           text: "1.892 €",
+//         },
+//       },
+//       {
+//         id: 6,
+//         name: "Super Sans Plomb 98",
+//         short_name: "SP98",
+//         picto: "E5",
+//         Update: {
+//           value: "2023-10-14T08:09:06Z",
+//           text: "14/10/2023 08:09:06",
+//         },
+//         available: true,
+//         Price: {
+//           value: 1.99,
+//           currency: "EUR",
+//           text: "1.99 €",
+//         },
+//       },
+//     ],
+//   },
+// ];
 
-const quantitiesEx = {
-  e85: 13, // Quantité de E85 en litres
-  sp95E10: 0, // Quantité de SP95-E10 en litres
-  sp98: 26, // Quantité de SP98 en litres
-};
+// const quantitiesEx = {
+//   e85: 13,
+//   sp95E10: 26,
+//   sp98: 0,
+// };
 
-function blendAndSort(stations, quantities) {
+export function blendAndSort(stations, quantities) {
   const { e85, sp95E10, sp98 } = quantities;
+  console.log("La fonction blendAndSort s'exécute...");
+  console.log(stations);
+  console.log(quantities);
+  //   if (e85 === 0) {
+  //     return "La quantité de E85 ne peut pas être égale à zéro. Veuillez spécifier une quantité valide.";
+  //   }
 
   const sortedStations = stations
     .filter((station) => station.Fuels.some((fuel) => fuel.id === 3)) // Exclut les stations sans carburant E85
@@ -390,11 +446,11 @@ function blendAndSort(stations, quantities) {
         totalPrice,
       };
     });
-
+  console.log(sortedStations);
   // Triez les stations en fonction du prix total
   sortedStations.sort((a, b) => a.totalPrice - b.totalPrice);
 
   return sortedStations;
 }
 
-console.log(blendAndSort(stationsArr, quantitiesEx));
+// console.log(blendAndSort(stationsEx, quantitiesEx));

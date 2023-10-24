@@ -1,6 +1,7 @@
 import styles from "../styles/Home.module.css";
 import "tailwindcss/tailwind.css";
 import { useState, useEffect } from "react";
+import { blendAndSort } from "../modules/blendAndSort";
 import { searchCity } from "../modules/searchCity";
 import { searchCoordinates } from "../modules/searchCoordinates";
 import { Modal } from "antd";
@@ -18,6 +19,7 @@ function Home() {
   const [rangeSp95, setRangeSp95] = useState(0);
   const [rangeSp98, setRangeSp98] = useState(0);
   const [rangeE85, setRangeE85] = useState(0);
+  const [threeFuelsData, setThreeFuelsData] = useState(null);
 
   useEffect(() => {
     // Cette fonction sera appelée chaque fois que stationsData change
@@ -27,6 +29,15 @@ function Home() {
       setInputSearch(""); // Efface le contenu de l'input
     }, 500);
   }, [stationsData]);
+
+  useEffect(() => {
+    const quantities = {
+      e85: rangeE85, // Quantité de E85 en litres
+      sp95E10: rangeSp95, // Quantité de SP95-E10 en litres
+      sp98: rangeSp98, // Quantité de SP98 en litres
+    };
+    setThreeFuelsData(quantities);
+  }, [rangeE85, rangeSp95, rangeSp98]);
 
   useEffect(() => {
     if (latitude && longitude) {
@@ -63,6 +74,8 @@ function Home() {
         console.log("Touche Entrée pressée avec la valeur " + inputSearch);
         //console.log(result);
         if (result) {
+          const stationsSorted = await blendAndSort(result, threeFuelsData);
+          console.log(stationsSorted);
           setStationsData(result);
           stationsData && setIsLoading(false);
         }
@@ -78,7 +91,13 @@ function Home() {
   let stations;
   stations = stationsData.map((data, i) => {
     return (
-      <Station key={i} brand={data.Brand} fuels={data.Fuels} name={data.name} />
+      <Station
+        key={i}
+        brand={data.Brand}
+        fuels={data.Fuels}
+        name={data.name}
+        price={data.totalPrice}
+      />
     );
   });
 
@@ -146,6 +165,7 @@ function Home() {
         </div>
         {isLoading ? (
           <div>
+            <p>Chargement en cours...</p>
             <span className="loading loading-bars loading-md"></span>
           </div>
         ) : (

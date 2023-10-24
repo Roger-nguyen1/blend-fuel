@@ -19,6 +19,7 @@ function Station(props) {
           </div>
         ))}
       </div>
+      <p>{props.price}</p>
       <p>------------------------------</p>
     </div>
   );

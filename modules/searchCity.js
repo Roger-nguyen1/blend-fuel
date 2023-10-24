@@ -27,7 +27,7 @@ export async function searchCity(city) {
                 };
 
                 newDatasWithPrice.push(dataModified);
-                console.log(newDatasWithPrice);
+                //console.log(newDatasWithPrice);
               });
           }, 250); //250ms entre chaque requêtes
         }
