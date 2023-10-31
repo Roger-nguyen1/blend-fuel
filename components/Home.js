@@ -1,9 +1,9 @@
 import styles from "../styles/Home.module.css";
 import "tailwindcss/tailwind.css";
 import { useState, useEffect } from "react";
-import { blendAndSort } from "../modules/blendAndSort";
 import { searchCity } from "../modules/searchCity";
 import { searchCoordinates } from "../modules/searchCoordinates";
+import { codePostalSearch } from "../modules/codePostalSearch";
 import { Modal } from "antd";
 import Station from "../components/Station";
 import NavBar from "../components/NavBar";
@@ -23,7 +23,7 @@ function Home() {
 
   useEffect(() => {
     // Cette fonction sera appelée chaque fois que stationsData change
-    //console.log("StationsData a changé :", stationsData);
+    console.log("StationsData a changé :", stationsData);
     //console.log("Etat de isLoading : " + isLoading);
     setTimeout(() => {
       setInputSearch(""); // Efface le contenu de l'input
@@ -68,15 +68,22 @@ function Home() {
         showModal();
         setInputSearch("");
       } else if (rangeE85 >= 1) {
-        console.log("Touche Entrée pressée avec la valeur : " + inputSearch);
+        //console.log("Touche Entrée pressée avec la valeur : " + inputSearch);
         setIsLoading(true); // Affiche un message de chargement
+
+        //Lance la recherche de stations
         const result = await searchCity(inputSearch, threeFuelsData);
 
         //console.log(result);
-        if (result) {
+        if (result.length === 0) {
+          console.log("Aucuns résultats ; result = []");
+          const postCode = await codePostalSearch(inputSearch);
+          const newResult = await searchCity(postCode, threeFuelsData);
+          setStationsData(newResult);
+          stationsData && setIsLoading(false);
+        } else {
           setStationsData(result);
           stationsData && setIsLoading(false);
-          console.log(stationsData);
         }
       }
     }
@@ -120,7 +127,7 @@ function Home() {
           <div>
             <h1>Coordonnées GPS</h1>
             <button className="btn btn-accent" onClick={handleGetLocation}>
-              Récupérer les coordonnées
+              📍Récupérer les coordonnées
             </button>
             <p>Latitude : {latitude}</p>
             <p>Longitude : {longitude}</p>

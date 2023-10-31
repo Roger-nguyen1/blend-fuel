@@ -7,7 +7,7 @@ https://swagger.2aaz.fr/
 
 Exemple de requêtes pour l'API :
 
-https://api.prix-carburants.2aaz.fr/stations/?q=13710
+https://api.prix-carburants.2aaz.fr/stations/?q=13710&responseFields=Fuels,Price&Range=station=1-20
 => après q=code postal ou nom de la ville
 ajouter le code postal de la ville
 
@@ -17,3 +17,6 @@ ajouter la latitude et longitude sans espace
 
 API de Geocodin Gratuite :
 https://geocode.maps.co/
+
+API pour rechercher code postal avec le nom de la ville :
+https://api-adresse.data.gouv.fr/search/?q=la+destrousse&type=municipality

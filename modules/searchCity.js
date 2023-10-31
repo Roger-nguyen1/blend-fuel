@@ -6,7 +6,7 @@ let newDatasWithPrice;
 export async function searchCity(city, threeFuelsData) {
   const apiStations = "https://api.prix-carburants.2aaz.fr/stations/?q=";
 
-  let fetchId = false;
+  let fetchDatas = false;
 
   // Recherche des stations avec création d'un tableaux de stations
   const response = await fetch(
@@ -22,12 +22,14 @@ export async function searchCity(city, threeFuelsData) {
       Fuels: station.Fuels,
     }));
 
-    fetchId = true;
+    fetchDatas = true;
+  } else {
+    return "no datas";
   }
 
   // Fin du fetch
-  console.log("LOGS newDatasWithPrice ===> " + city);
-  console.log(newDatasWithPrice);
+  //console.log("LOGS newDatasWithPrice ===> " + city);
+  //console.log(newDatasWithPrice);
 
   const sortedStations = await blendAndSort(newDatasWithPrice, threeFuelsData);
 
