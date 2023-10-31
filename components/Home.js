@@ -52,6 +52,8 @@ function Home() {
 
   const handleGetLocation = async () => {
     //Récupère la latitude et la longitude à partir du navigateur
+
+    // CODE A RECTIFIER POUR LA LOCALISATION
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setLatitude(position.coords.latitude);
