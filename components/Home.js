@@ -66,19 +66,18 @@ function Home() {
     if (e.key === "Enter") {
       if (rangeE85 === 0 && inputSearch) {
         showModal();
-
         setInputSearch("");
       } else if (rangeE85 >= 1) {
+        console.log("Touche Entrée pressée avec la valeur : " + inputSearch);
         setIsLoading(true); // Affiche un message de chargement
-        const result = await searchCity(inputSearch);
-        console.log("Touche Entrée pressée avec la valeur " + inputSearch);
+        const result = await searchCity(inputSearch, threeFuelsData);
+
         //console.log(result);
-        // if (result) {
-        const stationsSorted = await blendAndSort(result, threeFuelsData);
-        console.log(stationsSorted);
-        setStationsData(result);
-        stationsData && setIsLoading(false);
-        //}
+        if (result) {
+          setStationsData(result);
+          stationsData && setIsLoading(false);
+          console.log(stationsData);
+        }
       }
     }
   };
@@ -173,12 +172,13 @@ function Home() {
         )}
         <div>
           <Modal
-            title="Hello!"
+            title="Blend Fuel"
             onCancel={() => setModalOn(false)}
             open={modalOn}
             footer={null}
           >
             <h1>La quantité de carburant E85 ne peut être à 0 litre.</h1>
+            <p>Renseignez une quantité de E85 supérieur à 0 litre.</p>
           </Modal>
         </div>
       </main>

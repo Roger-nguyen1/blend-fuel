@@ -19,8 +19,8 @@ function Station(props) {
           </div>
         ))}
       </div>
-      <p>{props.price}</p>
-      <p>------------------------------</p>
+      <p>Prix total du mélange : {props.price.toFixed(3)}</p>
+      <p>--------------------------------------</p>
     </div>
   );
 }
