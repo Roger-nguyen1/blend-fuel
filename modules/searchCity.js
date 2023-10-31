@@ -18,6 +18,8 @@ export async function searchCity(city, threeFuelsData) {
     newDatasWithPrice = data.map((station) => ({
       id: station.id,
       Brand: station.Brand.name,
+      adress: station.Address.street_line,
+      ville: station.Address.city_line,
       name: station.name,
       Fuels: station.Fuels,
     }));

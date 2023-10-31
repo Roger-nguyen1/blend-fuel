@@ -8,6 +8,8 @@ function Station(props) {
       <div>
         <p>Station : {props.brand}</p>
         <p>Nom : {props.name}</p>
+        <p>Addresse : {props.address}</p>
+        <p>Ville : {props.ville}</p>
       </div>
       <div>
         {fuelsData.map((data, i) => (

@@ -50,16 +50,49 @@ function Home() {
     }
   }, [latitude, longitude]);
 
-  const handleGetLocation = () => {
+  const handleGetLocation = async () => {
+    //Récupère la latitude et la longitude à partir du navigateur
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setLatitude(position.coords.latitude);
         setLongitude(position.coords.longitude);
+        const searchWithCoordinates = searchCoordinates(
+          position.coords.latitude,
+          position.coords.longitude,
+          threeFuelsData
+        );
+        setStationsData(searchWithCoordinates);
+        stationsData && setIsLoading(false);
       },
       (error) => {
         console.log(error);
       }
     );
+
+    // if (rangeE85 === 0) {
+    //   showModal();
+    //   setInputSearch("");
+    // } else if (rangeE85 >= 1 && latitude && longitude) {
+    //   setIsLoading(true);
+
+    //   //Lance la recherche de stations
+    //   const searchWithCoordinates = await searchCoordinates(
+    //     latitude,
+    //     longitude,
+    //     threeFuelsData
+    //   );
+
+    //   //
+    //   if (searchWithCoordinates.length === 0) {
+    //     console.log(
+    //       "Aucuns résultats ; result = [] ; Lancement de la recherche par code postal"
+    //     );
+    //     setIsLoading(false);
+    //   } else {
+    //     setStationsData(searchWithCoordinates);
+    //     stationsData && setIsLoading(false);
+    //   }
+    // }
   };
 
   const handleKeyPress = async (e) => {
@@ -72,17 +105,19 @@ function Home() {
         setIsLoading(true); // Affiche un message de chargement
 
         //Lance la recherche de stations
-        const result = await searchCity(inputSearch, threeFuelsData);
+        const searchCityResult = await searchCity(inputSearch, threeFuelsData);
 
         //console.log(result);
-        if (result.length === 0) {
-          console.log("Aucuns résultats ; result = []");
+        if (searchCityResult.length === 0) {
+          console.log(
+            "Aucuns résultats ; result = [] ; Lancement de la recherche par code postal"
+          );
           const postCode = await codePostalSearch(inputSearch);
           const newResult = await searchCity(postCode, threeFuelsData);
           setStationsData(newResult);
           stationsData && setIsLoading(false);
         } else {
-          setStationsData(result);
+          setStationsData(searchCityResult);
           stationsData && setIsLoading(false);
         }
       }
@@ -103,6 +138,8 @@ function Home() {
         fuels={data.Fuels}
         name={data.name}
         price={data.totalPrice}
+        address={data.adress}
+        ville={data.ville}
       />
     );
   });
@@ -122,7 +159,6 @@ function Home() {
             onChange={(e) => setInputSearch(e.target.value)}
             value={inputSearch}
             onKeyDown={handleKeyPress}
-            required
           />
           <div>
             <h1>Coordonnées GPS</h1>
