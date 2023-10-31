@@ -73,12 +73,12 @@ function Home() {
         const result = await searchCity(inputSearch);
         console.log("Touche Entrée pressée avec la valeur " + inputSearch);
         //console.log(result);
-        if (result) {
-          const stationsSorted = await blendAndSort(result, threeFuelsData);
-          console.log(stationsSorted);
-          setStationsData(result);
-          stationsData && setIsLoading(false);
-        }
+        // if (result) {
+        const stationsSorted = await blendAndSort(result, threeFuelsData);
+        console.log(stationsSorted);
+        setStationsData(result);
+        stationsData && setIsLoading(false);
+        //}
       }
     }
   };
