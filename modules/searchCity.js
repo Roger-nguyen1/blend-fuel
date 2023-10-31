@@ -10,7 +10,7 @@ export async function searchCity(city, threeFuelsData) {
 
   // Recherche des stations avec création d'un tableaux de stations
   const response = await fetch(
-    apiStations + city + "&responseFields=Fuels,Price"
+    apiStations + city + "&responseFields=Fuels,Price&Range=station=1-20"
   );
   const data = await response.json();
 
