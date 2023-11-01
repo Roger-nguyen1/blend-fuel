@@ -51,50 +51,37 @@ function Home() {
   }, [latitude, longitude]);
 
   const handleGetLocation = async () => {
-    //Récupère la latitude et la longitude à partir du navigateur
+    try {
+      // Récupère la latitude et la longitude à partir du navigateur
+      setIsLoading(true);
+      const position = await new Promise((resolve, reject) =>
+        navigator.geolocation.getCurrentPosition(resolve, reject)
+      );
 
-    // CODE A RECTIFIER POUR LA LOCALISATION
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setLatitude(position.coords.latitude);
-        setLongitude(position.coords.longitude);
-        const searchWithCoordinates = searchCoordinates(
-          position.coords.latitude,
-          position.coords.longitude,
-          threeFuelsData
-        );
-        setStationsData(searchWithCoordinates);
-        stationsData && setIsLoading(false);
-      },
-      (error) => {
-        console.log(error);
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+
+      if (!rangeE85) {
+        showModal();
+        setIsLoading(false);
+      } else if (rangeE85 >= 1) {
+        // Effectue une recherche de stations avec les coordonnées récupérées
+        let searchWithCoordinates;
+        if (position.coords.latitude && position.coords.longitude) {
+          searchWithCoordinates = await searchCoordinates(
+            position.coords.latitude,
+            position.coords.longitude,
+            threeFuelsData
+          );
+          searchWithCoordinates && setStationsData(searchWithCoordinates);
+        }
       }
-    );
 
-    // if (rangeE85 === 0) {
-    //   showModal();
-    //   setInputSearch("");
-    // } else if (rangeE85 >= 1 && latitude && longitude) {
-    //   setIsLoading(true);
-
-    //   //Lance la recherche de stations
-    //   const searchWithCoordinates = await searchCoordinates(
-    //     latitude,
-    //     longitude,
-    //     threeFuelsData
-    //   );
-
-    //   //
-    //   if (searchWithCoordinates.length === 0) {
-    //     console.log(
-    //       "Aucuns résultats ; result = [] ; Lancement de la recherche par code postal"
-    //     );
-    //     setIsLoading(false);
-    //   } else {
-    //     setStationsData(searchWithCoordinates);
-    //     stationsData && setIsLoading(false);
-    //   }
-    // }
+      // Définit la valeur de `setIsLoading()` en fonction de la valeur de `stationsData`
+      setIsLoading(stationsData ? false : true);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleKeyPress = async (e) => {
@@ -106,7 +93,7 @@ function Home() {
         //console.log("Touche Entrée pressée avec la valeur : " + inputSearch);
         setIsLoading(true); // Affiche un message de chargement
 
-        //Lance la recherche de stations
+        //Lance la recherche de stations avec le module searchCity
         const searchCityResult = await searchCity(inputSearch, threeFuelsData);
 
         //console.log(result);
@@ -132,19 +119,21 @@ function Home() {
 
   //mise à jour des stations avec stationsData.map
   let stations;
-  stations = stationsData.map((data, i) => {
-    return (
-      <Station
-        key={i}
-        brand={data.Brand}
-        fuels={data.Fuels}
-        name={data.name}
-        price={data.totalPrice}
-        address={data.adress}
-        ville={data.ville}
-      />
-    );
-  });
+  if (stationsData) {
+    stations = stationsData.map((data, i) => {
+      return (
+        <Station
+          key={i}
+          brand={data.Brand}
+          fuels={data.Fuels}
+          name={data.name}
+          price={data.totalPrice}
+          address={data.adress}
+          ville={data.ville}
+        />
+      );
+    });
+  }
 
   //
   return (
@@ -163,15 +152,16 @@ function Home() {
             onKeyDown={handleKeyPress}
           />
           <div>
-            <h1>Coordonnées GPS</h1>
+            <button className="btn btn-accent">Rechercher</button>
             <button className="btn btn-accent" onClick={handleGetLocation}>
-              📍Récupérer les coordonnées
+              📍Recherche par géolocalisation
             </button>
+
+            <p>Coordonnées GPS</p>
             <p>Latitude : {latitude}</p>
             <p>Longitude : {longitude}</p>
             <p>Ville : {city}</p>
           </div>
-          <button className="btn btn-accent">Rechercher</button>
         </div>
         <div>
           <p>___________________________________________</p>
@@ -201,7 +191,6 @@ function Home() {
             max="45"
             onChange={(e) => {
               setRangeE85(e.target.value);
-              console.log(e.target.value);
             }}
             value={rangeE85}
             className="range range-info"

@@ -419,32 +419,38 @@
 
 export function blendAndSort(stations, quantities) {
   const { e85, sp95E10, sp98 } = quantities;
-
+  let sortedStations;
   function calculateTotalPrice(sp95E10Price, e85Price, sp98Price) {
     return sp95E10Price * sp95E10 + e85Price * e85 + sp98Price * sp98;
   }
 
-  const sortedStations = stations
-    .filter((station) => station.Fuels.some((fuel) => fuel.id === 3))
-    .map((station) => {
-      const sp95E10Fuel = station.Fuels.filter((fuel) => fuel.id === 5);
-      const e85Fuel = station.Fuels.filter((fuel) => fuel.id === 3);
-      const sp98Fuel = station.Fuels.filter((fuel) => fuel.id === 6);
+  if (stations) {
+    sortedStations = stations
+      .filter((station) => station.Fuels.some((fuel) => fuel.id === 3))
+      .map((station) => {
+        const sp95E10Fuel = station.Fuels.filter((fuel) => fuel.id === 5);
+        const e85Fuel = station.Fuels.filter((fuel) => fuel.id === 3);
+        const sp98Fuel = station.Fuels.filter((fuel) => fuel.id === 6);
 
-      const sp95E10Price =
-        sp95E10Fuel.length > 0 ? sp95E10Fuel[0].Price.value : 0;
-      const e85Price = e85Fuel.length > 0 ? e85Fuel[0].Price.value : 0;
-      const sp98Price = sp98Fuel.length > 0 ? sp98Fuel[0].Price.value : 0;
+        const sp95E10Price =
+          sp95E10Fuel.length > 0 ? sp95E10Fuel[0].Price.value : 0;
+        const e85Price = e85Fuel.length > 0 ? e85Fuel[0].Price.value : 0;
+        const sp98Price = sp98Fuel.length > 0 ? sp98Fuel[0].Price.value : 0;
 
-      const totalPrice = calculateTotalPrice(sp95E10Price, e85Price, sp98Price);
+        const totalPrice = calculateTotalPrice(
+          sp95E10Price,
+          e85Price,
+          sp98Price
+        );
 
-      return {
-        ...station,
-        totalPrice,
-      };
-    });
+        return {
+          ...station,
+          totalPrice,
+        };
+      });
 
-  sortedStations.sort((a, b) => a.totalPrice - b.totalPrice);
+    sortedStations.sort((a, b) => a.totalPrice - b.totalPrice);
 
-  return sortedStations;
+    return sortedStations;
+  }
 }
