@@ -139,7 +139,7 @@ function Home() {
   return (
     <div data-theme="night">
       <NavBar />
-      <main className="flex items-center justify-center">
+      <main className="flex flex-row items-center justify-center">
         <h1 className="text-4xl">Welcome to Blend Fuel!</h1>
         <div>
           <input

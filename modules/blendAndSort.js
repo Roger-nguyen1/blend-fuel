@@ -420,6 +420,7 @@
 export function blendAndSort(stations, quantities) {
   const { e85, sp95E10, sp98 } = quantities;
   let sortedStations;
+
   function calculateTotalPrice(sp95E10Price, e85Price, sp98Price) {
     return sp95E10Price * sp95E10 + e85Price * e85 + sp98Price * sp98;
   }
