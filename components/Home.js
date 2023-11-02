@@ -144,7 +144,7 @@ function Home() {
         <div className="my-2 flex flex-col items-center justify-center">
           <input
             type="text"
-            placeholder="Rechercher une station"
+            placeholder="Rechercher une station par ville"
             className="m-3 input input-bordered input-info w-full max-w-xs"
             id="inputSearch"
             onChange={(e) => setInputSearch(e.target.value)}
@@ -152,18 +152,18 @@ function Home() {
             onKeyDown={handleKeyPress}
           />
 
-          <button className="m-2 btn btn-accent">Rechercher</button>
-          <button className="m-2 btn btn-accent" onClick={handleGetLocation}>
+          <button className="mb-2 btn btn-accent">Rechercher</button>
+          <button className="mb-2 btn btn-accent" onClick={handleGetLocation}>
             📍Recherche par géolocalisation
           </button>
 
-          <p>Coordonnées GPS</p>
+          {/* <p>Coordonnées GPS</p>
           <p>Latitude : {latitude}</p>
-          <p>Longitude : {longitude}</p>
-          <p>Ville : {city}</p>
+          <p>Longitude : {longitude}</p> */}
+          {city && <p>Ville : {city}</p>}
         </div>
         <div className="my-2 flex flex-col items-center justify-center">
-          <p className="mx-2.5">Choisissez la quantité de carburants* : </p>
+          <p className="mb-2.5">Choisissez la quantité de carburants* : </p>
           <label className="mx-2.5">SP95-E10 : {rangeSp95} L</label>
           <input
             type="range"
@@ -171,7 +171,7 @@ function Home() {
             max="45"
             onChange={(e) => setRangeSp95(e.target.value)}
             value={rangeSp95}
-            className="mx-2.5 w-3/4 range"
+            className="mb-2 range"
           />
           <label className="mx-2.5">SP98: {rangeSp98} L</label>
           <input
@@ -180,7 +180,7 @@ function Home() {
             max="45"
             onChange={(e) => setRangeSp98(e.target.value)}
             value={rangeSp98}
-            className="mx-2.5 w-3/4 range range-success"
+            className="mb-2 range range-success"
           />
           <label className="mx-2.5">E85: {rangeE85} L</label>
           <input
@@ -191,13 +191,13 @@ function Home() {
               setRangeE85(e.target.value);
             }}
             value={rangeE85}
-            className="mx-2.5 w-3/4 range range-info"
+            className="mb-2 range range-info"
           />
         </div>
         {isLoading ? (
           <div className="my-2 flex flex-col items-center justify-center">
-            <p>Chargement en cours...</p>
-            <span className="loading loading-bars loading-md"></span>
+            <p className="mb-2.5">Chargement en cours...</p>
+            <span className="loading loading-bars loading-lg"></span>
           </div>
         ) : (
           <div>{stations}</div>
