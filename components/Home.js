@@ -130,6 +130,7 @@ function Home() {
           price={data.totalPrice}
           address={data.adress}
           ville={data.ville}
+          distance={data.distance}
         />
       );
     });
