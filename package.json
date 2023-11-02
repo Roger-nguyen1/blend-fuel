@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fontsource/nunito": "^5.0.15",
     "antd": "^5.10.2",
     "autoprefixer": "^10.4.16",
     "codes-postaux": "^4.0.0",

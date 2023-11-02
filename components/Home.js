@@ -1,4 +1,3 @@
-import styles from "../styles/Home.module.css";
 import "tailwindcss/tailwind.css";
 import { useState, useEffect } from "react";
 import { searchCity } from "../modules/searchCity";
@@ -140,52 +139,50 @@ function Home() {
   return (
     <div data-theme="night">
       <NavBar />
-      <main className="flex flex-row items-center justify-center">
-        <h1 className="text-4xl">Welcome to Blend Fuel!</h1>
-        <div>
+      <main className="font-nunito flex flex-col items-center justify-center">
+        <h1 className="text-4xl mt-6">Welcome to Blend Fuel!</h1>
+        <div className="my-2 flex flex-col items-center justify-center">
           <input
             type="text"
             placeholder="Rechercher une station"
-            className="input input-bordered input-info w-full max-w-xs"
+            className="m-3 input input-bordered input-info w-full max-w-xs"
             id="inputSearch"
             onChange={(e) => setInputSearch(e.target.value)}
             value={inputSearch}
             onKeyDown={handleKeyPress}
           />
-          <div>
-            <button className="btn btn-accent">Rechercher</button>
-            <button className="btn btn-accent" onClick={handleGetLocation}>
-              📍Recherche par géolocalisation
-            </button>
 
-            <p>Coordonnées GPS</p>
-            <p>Latitude : {latitude}</p>
-            <p>Longitude : {longitude}</p>
-            <p>Ville : {city}</p>
-          </div>
+          <button className="m-2 btn btn-accent">Rechercher</button>
+          <button className="m-2 btn btn-accent" onClick={handleGetLocation}>
+            📍Recherche par géolocalisation
+          </button>
+
+          <p>Coordonnées GPS</p>
+          <p>Latitude : {latitude}</p>
+          <p>Longitude : {longitude}</p>
+          <p>Ville : {city}</p>
         </div>
-        <div>
-          <p>___________________________________________</p>
-          <p>Choisissez la quantité de carburants* : </p>
-          <label>SP95-E10 : {rangeSp95} L</label>
+        <div className="my-2 flex flex-col items-center justify-center">
+          <p className="mx-2.5">Choisissez la quantité de carburants* : </p>
+          <label className="mx-2.5">SP95-E10 : {rangeSp95} L</label>
           <input
             type="range"
             min={0}
             max="45"
             onChange={(e) => setRangeSp95(e.target.value)}
             value={rangeSp95}
-            className="range"
+            className="mx-2.5 w-3/4 range"
           />
-          <label>SP98: {rangeSp98} L</label>
+          <label className="mx-2.5">SP98: {rangeSp98} L</label>
           <input
             type="range"
             min={0}
             max="45"
             onChange={(e) => setRangeSp98(e.target.value)}
             value={rangeSp98}
-            className="range range-success"
+            className="mx-2.5 w-3/4 range range-success"
           />
-          <label>E85: {rangeE85} L</label>
+          <label className="mx-2.5">E85: {rangeE85} L</label>
           <input
             type="range"
             min={0}
@@ -194,11 +191,11 @@ function Home() {
               setRangeE85(e.target.value);
             }}
             value={rangeE85}
-            className="range range-info"
+            className="mx-2.5 w-3/4 range range-info"
           />
         </div>
         {isLoading ? (
-          <div>
+          <div className="my-2 flex flex-col items-center justify-center">
             <p>Chargement en cours...</p>
             <span className="loading loading-bars loading-md"></span>
           </div>

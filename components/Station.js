@@ -5,26 +5,25 @@ function Station(props) {
   const fuelsData = props.fuels;
 
   return (
-    <div className="border-2 m-2.5">
+    <div className="border-2 p-2 m-2.5 rounded-lg">
       <div>
-        <p>Station : {props.brand}</p>
-        <p>Distance : {props.distance}</p>
-        <p>Nom : {props.name}</p>
-        <p>Addresse : {props.address}</p>
-        <p>Ville : {props.ville}</p>
+        <p className="mx-2">Station : {props.brand}</p>
+        {props.distance && <p className="mx-2">Distance : {props.distance}</p>}
+        <p className="mx-2">Nom : {props.name}</p>
+        <p className="mx-2">Addresse : {props.address}</p>
+        <p className="mx-2">Ville : {props.ville}</p>
       </div>
       <div>
         {fuelsData.map((data, i) => (
           <div key={i}>
-            <p>
+            <p className="mx-2">
               {data.name} || Mis à jour le {data.Update.text}
             </p>
-            <p>{data.Price.value}€</p>
+            <p className="mx-2">{data.Price.value}€</p>
           </div>
         ))}
       </div>
-      <p>Prix total du mélange : {props.price.toFixed(3)}</p>
-      <p>--------------------------------------</p>
+      <p className="mx-2">Prix total du mélange : {props.price.toFixed(3)}</p>
     </div>
   );
 }
