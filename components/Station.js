@@ -31,7 +31,7 @@ function Station(props) {
       </div>
       <p className="mx-2 font-bold">
         Prix total du mélange :{" "}
-        <span className="text-lg">{props.price.toFixed(3)}</span>
+        <span className="text-lg">{props.price.toFixed(3)}€</span>
       </p>
     </div>
   );
