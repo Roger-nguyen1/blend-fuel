@@ -8,6 +8,7 @@ function Station(props) {
     <div className="border-2 m-2.5">
       <div>
         <p>Station : {props.brand}</p>
+        <p>Distance : {props.distance}</p>
         <p>Nom : {props.name}</p>
         <p>Addresse : {props.address}</p>
         <p>Ville : {props.ville}</p>

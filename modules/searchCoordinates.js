@@ -28,6 +28,7 @@ export async function searchCoordinates(lat, lon, threeFuelsData) {
         ville: station.Address.city_line,
         name: station.name,
         Fuels: station.Fuels,
+        distance: station.Distance.text,
       }));
 
       fetchDatas = true;
