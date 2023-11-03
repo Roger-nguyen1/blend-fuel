@@ -139,15 +139,9 @@ function Home() {
   return (
     <div data-theme="night">
       <NavBar />
-<<<<<<< HEAD
-      <main className="flex flex-col items-center justify-center">
-        <h1 className="text-4xl">Welcome to Blend Fuel!</h1>
-        <div className="m-3">
-=======
       <main className="font-nunito flex flex-col items-center justify-center">
         <h1 className="text-4xl mt-6">Welcome to Blend Fuel!</h1>
         <div className="my-2 flex flex-col items-center justify-center">
->>>>>>> b8d3405dfbe0f34c88dac85c04a082ba450b2f2e
           <input
             type="text"
             placeholder="Rechercher une station par ville"
