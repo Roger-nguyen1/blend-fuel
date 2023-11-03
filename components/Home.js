@@ -1,4 +1,3 @@
-import styles from "../styles/Home.module.css";
 import "tailwindcss/tailwind.css";
 import { useState, useEffect } from "react";
 import { searchCity } from "../modules/searchCity";
@@ -136,13 +135,13 @@ function Home() {
     });
   }
 
-  //
+  //className="flex flex-col items-center justify-center"
   return (
     <div data-theme="night">
       <NavBar />
-      <main className="flex items-center justify-center">
+      <main className="flex flex-col items-center justify-center">
         <h1 className="text-4xl">Welcome to Blend Fuel!</h1>
-        <div>
+        <div className="m-3">
           <input
             type="text"
             placeholder="Rechercher une station"
