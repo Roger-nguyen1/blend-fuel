@@ -139,52 +139,56 @@ function Home() {
   return (
     <div data-theme="night">
       <NavBar />
+<<<<<<< HEAD
       <main className="flex flex-col items-center justify-center">
         <h1 className="text-4xl">Welcome to Blend Fuel!</h1>
         <div className="m-3">
+=======
+      <main className="font-nunito flex flex-col items-center justify-center">
+        <h1 className="text-4xl mt-6">Welcome to Blend Fuel!</h1>
+        <div className="my-2 flex flex-col items-center justify-center">
+>>>>>>> b8d3405dfbe0f34c88dac85c04a082ba450b2f2e
           <input
             type="text"
-            placeholder="Rechercher une station"
-            className="input input-bordered input-info w-full max-w-xs"
+            placeholder="Rechercher une station par ville"
+            className="m-3 input input-bordered input-info w-full max-w-xs"
             id="inputSearch"
             onChange={(e) => setInputSearch(e.target.value)}
             value={inputSearch}
             onKeyDown={handleKeyPress}
           />
-          <div>
-            <button className="btn btn-accent">Rechercher</button>
-            <button className="btn btn-accent" onClick={handleGetLocation}>
-              📍Recherche par géolocalisation
-            </button>
 
-            <p>Coordonnées GPS</p>
-            <p>Latitude : {latitude}</p>
-            <p>Longitude : {longitude}</p>
-            <p>Ville : {city}</p>
-          </div>
+          <button className="mb-2 btn btn-accent">Rechercher</button>
+          <button className="mb-2 btn btn-accent" onClick={handleGetLocation}>
+            📍Recherche par géolocalisation
+          </button>
+
+          {/* <p>Coordonnées GPS</p>
+          <p>Latitude : {latitude}</p>
+          <p>Longitude : {longitude}</p> */}
+          {city && <p>Ville : {city}</p>}
         </div>
-        <div>
-          <p>___________________________________________</p>
-          <p>Choisissez la quantité de carburants* : </p>
-          <label>SP95-E10 : {rangeSp95} L</label>
+        <div className="my-2 flex flex-col items-center justify-center">
+          <p className="mb-2.5">Choisissez la quantité de carburants* : </p>
+          <label className="mx-2.5">SP95-E10 : {rangeSp95} L</label>
           <input
             type="range"
             min={0}
             max="45"
             onChange={(e) => setRangeSp95(e.target.value)}
             value={rangeSp95}
-            className="range"
+            className="mb-2 range"
           />
-          <label>SP98: {rangeSp98} L</label>
+          <label className="mx-2.5">SP98: {rangeSp98} L</label>
           <input
             type="range"
             min={0}
             max="45"
             onChange={(e) => setRangeSp98(e.target.value)}
             value={rangeSp98}
-            className="range range-success"
+            className="mb-2 range range-success"
           />
-          <label>E85: {rangeE85} L</label>
+          <label className="mx-2.5">E85: {rangeE85} L</label>
           <input
             type="range"
             min={0}
@@ -193,13 +197,13 @@ function Home() {
               setRangeE85(e.target.value);
             }}
             value={rangeE85}
-            className="range range-info"
+            className="mb-2 range range-info"
           />
         </div>
         {isLoading ? (
-          <div>
-            <p>Chargement en cours...</p>
-            <span className="loading loading-bars loading-md"></span>
+          <div className="my-2 flex flex-col items-center justify-center">
+            <p className="mb-2.5">Chargement en cours...</p>
+            <span className="loading loading-bars loading-lg"></span>
           </div>
         ) : (
           <div>{stations}</div>
