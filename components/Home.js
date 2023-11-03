@@ -4,8 +4,10 @@ import { searchCity } from "../modules/searchCity";
 import { searchCoordinates } from "../modules/searchCoordinates";
 import { codePostalSearch } from "../modules/codePostalSearch";
 import { Modal } from "antd";
+//import { Modal } from "react-daisyui";
 import Station from "../components/Station";
 import NavBar from "../components/NavBar";
+//import MyModal from "./Modal";
 
 function Home() {
   const [inputSearch, setInputSearch] = useState("");
@@ -15,6 +17,7 @@ function Home() {
   const [city, setCity] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [modalOn, setModalOn] = useState(false);
+
   const [rangeSp95, setRangeSp95] = useState(0);
   const [rangeSp98, setRangeSp98] = useState(0);
   const [rangeE85, setRangeE85] = useState(0);
@@ -86,12 +89,13 @@ function Home() {
   const handleKeyPress = async (e) => {
     if (e.key === "Enter") {
       if (rangeE85 === 0 && inputSearch) {
-        showModal();
+        //showModal();
+        document.getElementById("my_modal_2").showModal();
         setInputSearch("");
       } else if (rangeE85 >= 1) {
         //console.log("Touche Entrée pressée avec la valeur : " + inputSearch);
         setIsLoading(true); // Affiche un message de chargement
-
+        setCity("");
         //Lance la recherche de stations avec le module searchCity
         const searchCityResult = await searchCity(inputSearch, threeFuelsData);
 
@@ -142,27 +146,6 @@ function Home() {
       <main className="font-nunito flex flex-col items-center justify-center">
         <h1 className="text-4xl mt-6">Welcome to Blend Fuel!</h1>
         <div className="my-2 flex flex-col items-center justify-center">
-          <input
-            type="text"
-            placeholder="Rechercher une station par ville"
-            className="m-3 input input-bordered input-info w-full max-w-xs"
-            id="inputSearch"
-            onChange={(e) => setInputSearch(e.target.value)}
-            value={inputSearch}
-            onKeyDown={handleKeyPress}
-          />
-
-          <button className="mb-2 btn btn-accent">Rechercher</button>
-          <button className="mb-2 btn btn-accent" onClick={handleGetLocation}>
-            📍Recherche par géolocalisation
-          </button>
-
-          {/* <p>Coordonnées GPS</p>
-          <p>Latitude : {latitude}</p>
-          <p>Longitude : {longitude}</p> */}
-          {city && <p>Ville : {city}</p>}
-        </div>
-        <div className="my-2 flex flex-col items-center justify-center">
           <p className="mb-2.5">Choisissez la quantité de carburants* : </p>
           <label className="mx-2.5">SP95-E10 : {rangeSp95} L</label>
           <input
@@ -194,6 +177,33 @@ function Home() {
             className="mb-2 range range-info"
           />
         </div>
+        <div className="my-2 flex flex-col items-center justify-center">
+          <input
+            type="text"
+            placeholder="Rechercher une station par ville"
+            className="m-3 input input-bordered input-info w-full max-w-xs"
+            id="inputSearch"
+            onChange={(e) => setInputSearch(e.target.value)}
+            value={inputSearch}
+            onKeyDown={handleKeyPress}
+          />
+
+          <button className="mb-2 btn bg-indigo-600 hover:bg-indigo-800">
+            Rechercher
+          </button>
+          <button
+            className="mb-2 btn bg-indigo-600 hover:bg-indigo-800"
+            onClick={handleGetLocation}
+          >
+            📍Recherche par géolocalisation
+          </button>
+
+          {/* <p>Coordonnées GPS</p>
+          <p>Latitude : {latitude}</p>
+          <p>Longitude : {longitude}</p> */}
+          {city && <p>Ville : {city}</p>}
+        </div>
+
         {isLoading ? (
           <div className="my-2 flex flex-col items-center justify-center">
             <p className="mb-2.5">Chargement en cours...</p>
@@ -213,6 +223,10 @@ function Home() {
             <p>Renseignez une quantité de E85 supérieur à 0 litre.</p>
           </Modal>
         </div>
+
+        {/* <div>
+          <MyModal />
+        </div> */}
       </main>
     </div>
   );
