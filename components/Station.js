@@ -1,15 +1,28 @@
 import React from "react";
 import "tailwindcss/tailwind.css";
+import { Icon } from "@iconify/react";
 
 function Station(props) {
   const fuelsData = props.fuels;
+
+  function Distance() {
+    return (
+      <div className="flex items-center">
+        <Icon icon="eva:navigation-2-fill" />
+        <p className="mr-2">{props.distance}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="border-2 p-2 m-2.5 rounded-lg">
       <div>
         <div className="flex justify-between items-center">
-          <p className="mx-2">Station : {props.brand}</p>
-          {props.distance && <p className="mx-2">{props.distance}</p>}
+          <div className="flex items-center ml-2">
+            <Icon icon="mingcute:gas-station-fill" />
+            <p>Station : {props.brand}</p>
+          </div>
+          {props.distance && <Distance />}
         </div>
         <p className="mx-2">Nom : {props.name}</p>
         <p className="mx-2 text-xs">

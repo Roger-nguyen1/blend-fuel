@@ -20,3 +20,6 @@ https://geocode.maps.co/
 
 API pour rechercher code postal avec le nom de la ville :
 https://api-adresse.data.gouv.fr/search/?q=la+destrousse&type=municipality
+
+icones utilisés :
+https://icon-sets.iconify.design/

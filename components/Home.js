@@ -17,7 +17,6 @@ function Home() {
   const [city, setCity] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [modalOn, setModalOn] = useState(false);
-
   const [rangeSp95, setRangeSp95] = useState(0);
   const [rangeSp98, setRangeSp98] = useState(0);
   const [rangeE85, setRangeE85] = useState(0);
@@ -86,33 +85,39 @@ function Home() {
     }
   };
 
+  const searchStations = async () => {
+    if (rangeE85 === 0 && inputSearch) {
+      showModal();
+
+      setInputSearch("");
+    } else if (rangeE85 >= 1) {
+      setIsLoading(true); // Affiche un message de chargement
+      setCity("");
+      //Lance la recherche de stations avec le module searchCity
+      const searchCityResult = await searchCity(inputSearch, threeFuelsData);
+
+      if (searchCityResult.length === 0) {
+        console.log(
+          "Aucuns résultats ; result = [] ; Lancement de la recherche par code postal"
+        );
+        const postCode = await codePostalSearch(inputSearch);
+        const newResult = await searchCity(postCode, threeFuelsData);
+        setStationsData(newResult);
+        stationsData && setIsLoading(false);
+      } else {
+        setStationsData(searchCityResult);
+        stationsData && setIsLoading(false);
+      }
+    }
+  };
+
+  const handleSearch = () => {
+    searchStations();
+  };
+
   const handleKeyPress = async (e) => {
     if (e.key === "Enter") {
-      if (rangeE85 === 0 && inputSearch) {
-        //showModal();
-        document.getElementById("my_modal_2").showModal();
-        setInputSearch("");
-      } else if (rangeE85 >= 1) {
-        //console.log("Touche Entrée pressée avec la valeur : " + inputSearch);
-        setIsLoading(true); // Affiche un message de chargement
-        setCity("");
-        //Lance la recherche de stations avec le module searchCity
-        const searchCityResult = await searchCity(inputSearch, threeFuelsData);
-
-        //console.log(result);
-        if (searchCityResult.length === 0) {
-          console.log(
-            "Aucuns résultats ; result = [] ; Lancement de la recherche par code postal"
-          );
-          const postCode = await codePostalSearch(inputSearch);
-          const newResult = await searchCity(postCode, threeFuelsData);
-          setStationsData(newResult);
-          stationsData && setIsLoading(false);
-        } else {
-          setStationsData(searchCityResult);
-          stationsData && setIsLoading(false);
-        }
-      }
+      searchStations();
     }
   };
 
@@ -188,7 +193,10 @@ function Home() {
             onKeyDown={handleKeyPress}
           />
 
-          <button className="mb-2 btn bg-indigo-600 hover:bg-indigo-800">
+          <button
+            className="mb-2 btn bg-indigo-600 hover:bg-indigo-800"
+            onClick={handleSearch}
+          >
             Rechercher
           </button>
           <button
@@ -223,10 +231,6 @@ function Home() {
             <p>Renseignez une quantité de E85 supérieur à 0 litre.</p>
           </Modal>
         </div>
-
-        {/* <div>
-          <MyModal />
-        </div> */}
       </main>
     </div>
   );
