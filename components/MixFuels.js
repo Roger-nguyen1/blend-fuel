@@ -9,7 +9,7 @@ import Station from "../components/Station";
 
 //import MyModal from "./Modal";
 
-function Home() {
+function MixFuels() {
   const [inputSearch, setInputSearch] = useState("");
   const [stationsData, setStationsData] = useState([]);
   const [latitude, setLatitude] = useState(null);
@@ -235,4 +235,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default MixFuels;

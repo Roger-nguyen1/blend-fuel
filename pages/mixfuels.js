@@ -1,7 +1,5 @@
 import MixFuels from "../components/MixFuels";
 
-function Index() {
+export default function MixFuelsPage() {
   return <MixFuels />;
 }
-
-export default Index;
