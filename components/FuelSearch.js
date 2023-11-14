@@ -58,7 +58,9 @@ function FuelSearch() {
   return (
     <div data-theme="night">
       <main className="font-nunito flex flex-col items-center justify-center">
-        <h1 className="text-4xl mt-6">Recherche par carburant</h1>
+        <h1 className="text-4xl mt-6">
+          Recherche par carburant...en cours de développement
+        </h1>
 
         <div className="my-2 flex flex-col items-center justify-center">
           <input
