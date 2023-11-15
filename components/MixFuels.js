@@ -1,7 +1,7 @@
 import "tailwindcss/tailwind.css";
 import { useState, useEffect } from "react";
-import { searchCity } from "../modules/searchCity";
-import { searchCoordinates } from "../modules/searchCoordinates";
+import { mixSearchCity } from "../modules/mixSearchCity";
+import { mixSearchCoordinates } from "../modules/mixSearchCoordinates";
 import { codePostalSearch } from "../modules/codePostalSearch";
 import { Modal } from "antd";
 //import { Modal } from "react-daisyui";
@@ -69,7 +69,7 @@ function MixFuels() {
         // Effectue une recherche de stations avec les coordonnées récupérées
         let searchWithCoordinates;
         if (position.coords.latitude && position.coords.longitude) {
-          searchWithCoordinates = await searchCoordinates(
+          searchWithCoordinates = await mixSearchCoordinates(
             position.coords.latitude,
             position.coords.longitude,
             threeFuelsData
@@ -94,7 +94,7 @@ function MixFuels() {
       setIsLoading(true); // Affiche un message de chargement
       setCity("");
       //Lance la recherche de stations avec le module searchCity
-      const searchCityResult = await searchCity(inputSearch, threeFuelsData);
+      const searchCityResult = await mixSearchCity(inputSearch, threeFuelsData);
 
       if (searchCityResult.length === 0) {
         console.log(

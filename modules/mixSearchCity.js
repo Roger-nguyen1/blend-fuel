@@ -3,7 +3,7 @@ import { blendAndSort } from "./blendAndSort";
 
 let newDatasWithPrice;
 
-export async function searchCity(city, threeFuelsData) {
+export async function mixSearchCity(city, threeFuelsData) {
   const apiStations = "https://api.prix-carburants.2aaz.fr/stations/?q=";
 
   let fetchDatas = false;

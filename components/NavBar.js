@@ -20,7 +20,7 @@ function NavBar() {
 
   return (
     <div className="btm-nav">
-      <Button index={0} to="/account">
+      <Button index={1} to="/account">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-5 w-5"
@@ -37,14 +37,14 @@ function NavBar() {
         </svg>
         <span className="btm-nav-label">Compte</span>
       </Button>
-      <Button index={1} to="/">
+      <Button index={0} to="/">
         <Icon icon="ic:twotone-blender" width="25" height="25" />
 
         <span className="btm-nav-label">Mix Carburant</span>
       </Button>
       <Button index={2} to="/fuelsearch">
         <Icon icon="ri:gas-station-fill" width="25" height="25" />
-        <span className="btm-nav-label">Recherche par carburant</span>
+        <span className="btm-nav-label">🔎 par carburant</span>
       </Button>
     </div>
   );

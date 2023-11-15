@@ -1,9 +1,9 @@
-//SearchCoordinates.js
+//mixSearchCoordinates.js
 import { blendAndSort } from "./blendAndSort";
 
 let newDatasWithPrice;
 
-export async function searchCoordinates(lat, lon, threeFuelsData) {
+export async function mixSearchCoordinates(lat, lon, threeFuelsData) {
   const apiCarburantAround =
     "https://api.prix-carburants.2aaz.fr/stations/around/";
   //
