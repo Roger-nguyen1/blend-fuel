@@ -21,7 +21,7 @@ export async function mixSearchCity(city, threeFuelsData) {
       adress: station.Address.street_line,
       ville: station.Address.city_line,
       name: station.name,
-      Fuels: station.Fuels,
+      Fuels: station.Fuels.filter((fuel) => fuel.id !== 1 && fuel.id !== 4),
     }));
 
     fetchDatas = true;
@@ -30,8 +30,8 @@ export async function mixSearchCity(city, threeFuelsData) {
   }
 
   // Fin du fetch
-  //console.log("LOGS newDatasWithPrice ===> " + city);
-  //console.log(newDatasWithPrice);
+  // console.log("LOGS newDatasWithPrice ===> " + city);
+  // console.log(newDatasWithPrice);
 
   const sortedStations = await blendAndSort(newDatasWithPrice, threeFuelsData);
 

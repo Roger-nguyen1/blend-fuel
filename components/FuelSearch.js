@@ -8,6 +8,7 @@ function FuelSearch() {
   const [inputSearch, setInputSearch] = useState("");
   const [city, setCity] = useState(null);
   const [stationsData, setStationsData] = useState([]);
+  const [radioBoxFuel, setRadioBoxFuel] = useState(null);
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -111,8 +112,85 @@ function FuelSearch() {
         <h1 className="text-4xl mt-6">
           Recherche par carburant...en cours de développement
         </h1>
+        <p className="text-lg mt-2.5">Sélectionnez votre carburant</p>
+        <div className="flex mt-2.5">
+          <div>
+            <label>
+              <input
+                className="mr-1"
+                type="radio"
+                name="fuelFilter"
+                value="e85"
+                onChange={(e) => setRadioBoxFuel(e.target.value)}
+              />
+              E85
+            </label>
+          </div>
 
-        <div className="my-2 flex flex-col items-center justify-center">
+          <div className="ml-2">
+            <label>
+              <input
+                className="mr-1"
+                type="radio"
+                name="fuelFilter"
+                value="sp95"
+                onChange={(e) => setRadioBoxFuel(e.target.value)}
+              />
+              SP95
+            </label>
+          </div>
+          <div className="ml-2">
+            <label>
+              <input
+                className="mr-1"
+                type="radio"
+                name="fuelFilter"
+                value="sp95-10"
+                onChange={(e) => setRadioBoxFuel(e.target.value)}
+              />
+              SP95-10
+            </label>
+          </div>
+          <div className="ml-2">
+            <label>
+              <input
+                className="mr-1"
+                type="radio"
+                name="fuelFilter"
+                value="sp98"
+                onChange={(e) => setRadioBoxFuel(e.target.value)}
+              />
+              SP98
+            </label>
+          </div>
+        </div>
+        <div className="flex">
+          <div>
+            <label>
+              <input
+                className="mr-1"
+                type="radio"
+                name="fuelFilter"
+                value="gazole"
+                onChange={(e) => setRadioBoxFuel(e.target.value)}
+              />
+              Gazole
+            </label>
+          </div>
+          <div className="ml-2">
+            <label>
+              <input
+                className="mr-1"
+                type="radio"
+                name="fuelFilter"
+                value="gpl"
+                onChange={(e) => setRadioBoxFuel(e.target.value)}
+              />
+              GPL
+            </label>
+          </div>
+        </div>
+        <div className="mb-2 flex flex-col items-center justify-center">
           <input
             type="text"
             placeholder="Rechercher une station par ville"
@@ -120,6 +198,7 @@ function FuelSearch() {
             id="inputSearch"
             onChange={(e) => setInputSearch(e.target.value)}
             value={inputSearch}
+            onKeyDown={handleKeyPress}
           />
 
           <button

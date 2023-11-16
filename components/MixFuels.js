@@ -102,7 +102,7 @@ function MixFuels() {
           "Aucuns résultats ; result = [] ; Lancement de la recherche par code postal"
         );
         const postCode = await codePostalSearch(inputSearch);
-        const newResult = await searchCity(postCode, threeFuelsData);
+        const newResult = await mixSearchCity(postCode, threeFuelsData);
         setStationsData(newResult);
         stationsData && setIsLoading(false);
       } else {
@@ -151,7 +151,9 @@ function MixFuels() {
       <main className="font-nunito flex flex-col items-center justify-center">
         <h1 className="text-4xl mt-6">Welcome to Blend Fuel!</h1>
         <div className="my-2 flex flex-col items-center justify-center">
-          <p className="mb-2.5">Choisissez la quantité de carburants* : </p>
+          <p className="text-lg mb-2.5">
+            Choisissez la quantité de carburants* :{" "}
+          </p>
           <label className="mx-2.5">SP95-E10 : {rangeSp95} L</label>
           <input
             type="range"
