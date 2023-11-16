@@ -9,6 +9,10 @@ export async function searchFuelByCity(city) {
   const response = await fetch(
     apiStations + city + "&responseFields=Fuels,Price&Range=station=1-20"
   );
+
+  const headers = response.headers;
+  const contentType = headers.get("content-type");
+
   const data = await response.json();
 
   if (data !== null) {

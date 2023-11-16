@@ -121,7 +121,6 @@ function FuelSearch() {
             brand={data.Brand}
             fuels={filteredFuels}
             name={data.name}
-            price={data.totalPrice}
             address={data.adress}
             ville={data.ville}
             distance={data.distance}
@@ -131,6 +130,13 @@ function FuelSearch() {
         return null; // Aucun carburant correspondant à la sélection
       }
     });
+    // Filtrer les stations non nulles
+    stations = stations.filter((station) => station !== null);
+
+    // Trier les stations par ordre croissant en fonction du prix du carburant sélectionné
+    stations.sort(
+      (a, b) => a.props.fuels[0].Price.value - b.props.fuels[0].Price.value
+    );
   }
 
   // ...
