@@ -4,6 +4,7 @@ import { mixSearchCity } from "../modules/mixSearchCity";
 import { mixSearchCoordinates } from "../modules/mixSearchCoordinates";
 import { codePostalSearch } from "../modules/codePostalSearch";
 import { Modal } from "antd";
+
 //import { Modal } from "react-daisyui";
 import Station from "../components/Station";
 
