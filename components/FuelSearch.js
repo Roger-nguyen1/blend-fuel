@@ -88,23 +88,52 @@ function FuelSearch() {
     }
   };
 
+  // ...
+
   let stations;
   if (stationsData) {
     stations = stationsData.map((data, i) => {
-      return (
-        <FuelByPrice
-          key={i}
-          brand={data.Brand}
-          fuels={data.Fuels}
-          name={data.name}
-          price={data.totalPrice}
-          address={data.adress}
-          ville={data.ville}
-          distance={data.distance}
-        />
-      );
+      // Filtrer les carburants en fonction de la radioBoxFuel
+      const filteredFuels = data.Fuels.filter((fuel) => {
+        switch (radioBoxFuel) {
+          case "gazole":
+            return fuel.id === 1;
+          case "sp95":
+            return fuel.id === 2;
+          case "e85":
+            return fuel.id === 3;
+          case "gpl":
+            return fuel.id === 4;
+          case "sp95-e10":
+            return fuel.id === 5;
+          case "sp98":
+            return fuel.id === 6;
+          default:
+            return true; // Si aucune radioBoxFuel sélectionnée, afficher tous les carburants
+        }
+      });
+
+      // Afficher le composant uniquement si au moins un carburant est trouvé
+      if (filteredFuels.length > 0) {
+        return (
+          <FuelByPrice
+            key={i}
+            brand={data.Brand}
+            fuels={filteredFuels}
+            name={data.name}
+            price={data.totalPrice}
+            address={data.adress}
+            ville={data.ville}
+            distance={data.distance}
+          />
+        );
+      } else {
+        return null; // Aucun carburant correspondant à la sélection
+      }
     });
   }
+
+  // ...
 
   return (
     <div data-theme="night">
@@ -145,10 +174,10 @@ function FuelSearch() {
                 className="mr-1"
                 type="radio"
                 name="fuelFilter"
-                value="sp95-10"
+                value="sp95-e10"
                 onChange={(e) => setRadioBoxFuel(e.target.value)}
               />
-              SP95-10
+              SP95-E10
             </label>
           </div>
           <div className="ml-2">
