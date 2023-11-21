@@ -7,6 +7,7 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "node_modules/daisyui/dist/**/*.js",
     "node_modules/react-daisyui/dist/**/*.js",
+    "node_modules/preline/dist/*.js",
   ],
   theme: {
     extend: {
@@ -17,7 +18,7 @@ module.exports = {
       },
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"), require("preline/plugin")],
   daisyui: {
     themes: ["night"],
   },
