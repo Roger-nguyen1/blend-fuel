@@ -64,7 +64,9 @@ export async function mixSearchCoordinates(lat, lon, threeFuelsData) {
               adress: station.Address.street_line,
               ville: station.Address.city_line,
               name: station.name,
-              Fuels: station.Fuels,
+              Fuels: station.Fuels.filter(
+                (fuel) => fuel.id !== 1 && fuel.id !== 4
+              ),
               distance: station.Distance.text,
             }))
           );

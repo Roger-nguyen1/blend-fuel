@@ -421,27 +421,38 @@ export function blendAndSort(stations, quantities) {
   const { e85, sp95E10, sp98 } = quantities;
   let sortedStations;
 
-  function calculateTotalPrice(sp95E10Price, e85Price, sp98Price) {
-    return sp95E10Price * sp95E10 + e85Price * e85 + sp98Price * sp98;
+  // function calculateTotalPrice(sp95E10Price, e85Price, sp98Price) {
+  //   return sp95E10Price * sp95E10 + e85Price * e85 + sp98Price * sp98;
+  // }
+
+  function calculateTotalPrice(sp95E10Price, e85Price, sp98Price, sp95Price) {
+    // Utiliser le prix de SP95 (id=2) si SP95-E10 (id=5) n'est pas disponible
+    const finalSP95Price = sp95E10Price > 0 ? sp95E10Price : sp95Price;
+
+    return finalSP95Price * sp95E10 + e85Price * e85 + sp98Price * sp98;
   }
 
   if (stations) {
     sortedStations = stations
       .filter((station) => station.Fuels.some((fuel) => fuel.id === 3))
       .map((station) => {
+        const sp95Fuel = station.Fuels.filter((fuel) => fuel.id === 2);
         const sp95E10Fuel = station.Fuels.filter((fuel) => fuel.id === 5);
         const e85Fuel = station.Fuels.filter((fuel) => fuel.id === 3);
         const sp98Fuel = station.Fuels.filter((fuel) => fuel.id === 6);
 
         const sp95E10Price =
           sp95E10Fuel.length > 0 ? sp95E10Fuel[0].Price.value : 0;
+        const sp95Price = sp95Fuel.length > 0 ? sp95Fuel[0].Price.value : 0;
         const e85Price = e85Fuel.length > 0 ? e85Fuel[0].Price.value : 0;
         const sp98Price = sp98Fuel.length > 0 ? sp98Fuel[0].Price.value : 0;
+        console.log(sp95Price);
 
         const totalPrice = calculateTotalPrice(
           sp95E10Price,
           e85Price,
-          sp98Price
+          sp98Price,
+          sp95Price
         );
 
         return {
