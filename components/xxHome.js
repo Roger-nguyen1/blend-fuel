@@ -5,7 +5,7 @@ import { searchCoordinates } from "../modules/searchCoordinates";
 import { codePostalSearch } from "../modules/codePostalSearch";
 import { Modal } from "antd";
 //import { Modal } from "react-daisyui";
-import Station from "../components/Station";
+import Station from "./Station";
 
 //import MyModal from "./Modal";
 

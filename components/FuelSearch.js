@@ -4,6 +4,7 @@ import { searchFuelByCity } from "../modules/searchFuelByCity";
 import { searchFuelByCoordinates } from "../modules/searchFuelByCoordinates";
 import { codePostalSearch } from "../modules/codePostalSearch";
 import FuelByPrice from "../components/FuelByPrice";
+import Footer from "../components/Footer";
 
 function FuelSearch() {
   const [inputSearch, setInputSearch] = useState("");
@@ -267,6 +268,7 @@ function FuelSearch() {
         ) : (
           <div>{stations}</div>
         )}
+        <Footer />
       </main>
     </div>
   );

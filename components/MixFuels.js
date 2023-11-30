@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { mixSearchCity } from "../modules/mixSearchCity";
 import { mixSearchCoordinates } from "../modules/mixSearchCoordinates";
 import { codePostalSearch } from "../modules/codePostalSearch";
+import Footer from "../components/Footer";
 import { Modal } from "antd";
 
 //import { Modal } from "react-daisyui";
@@ -222,6 +223,7 @@ function MixFuels() {
         ) : (
           <div>{stations}</div>
         )}
+        <Footer />
         <div>
           <Modal
             title="Blend Fuel"

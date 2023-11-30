@@ -1,10 +1,10 @@
 function Footer() {
   return (
-    <footer className="footer fixed bottom-0 left-0 w-full p-4 bg-transparent text-base-content">
-      <aside>
-        <p>Copyright © 2023 - All right reserved by Roger NGUYEN</p>
-      </aside>
-    </footer>
+    <div className="m-5 w-full p-4 bg-transparent text-base-content">
+      <p className="text-center">
+        Copyright © 2023 - All right reserved by Roger NGUYEN
+      </p>
+    </div>
   );
 }
 
