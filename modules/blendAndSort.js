@@ -446,7 +446,6 @@ export function blendAndSort(stations, quantities) {
         const sp95Price = sp95Fuel.length > 0 ? sp95Fuel[0].Price.value : 0;
         const e85Price = e85Fuel.length > 0 ? e85Fuel[0].Price.value : 0;
         const sp98Price = sp98Fuel.length > 0 ? sp98Fuel[0].Price.value : 0;
-        console.log(sp95Price);
 
         const totalPrice = calculateTotalPrice(
           sp95E10Price,
