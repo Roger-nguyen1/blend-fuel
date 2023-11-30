@@ -1,3 +1,6 @@
+//codePostalSearch.js
+//Requête pour obtenir le code postal à partir de le nom de la ville contenant un espace
+
 export async function codePostalSearch(city) {
   const apiCodePostal = "https://api-adresse.data.gouv.fr/search/?q=";
   const type = "&type=municipality";

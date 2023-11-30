@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { searchFuelByCity } from "../modules/searchFuelByCity";
 import { searchFuelByCoordinates } from "../modules/searchFuelByCoordinates";
-import { fuelSearchCity } from "../modules/fuelSearchCity";
 import { codePostalSearch } from "../modules/codePostalSearch";
 import FuelByPrice from "../components/FuelByPrice";
 
@@ -46,7 +45,7 @@ function FuelSearch() {
         "Aucuns résultats ; result = [] ; Lancement de la recherche par code postal"
       );
       const postCode = await codePostalSearch(inputSearch);
-      const newResult = await fuelSearchCity(postCode);
+      const newResult = await searchFuelByCity(postCode);
       setStationsData(newResult);
       stationsData && setIsLoading(false);
     } else {
