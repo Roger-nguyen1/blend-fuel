@@ -1,9 +1,8 @@
-//mixSearchCity.js
-import { blendAndSort } from "./blendAndSort";
+//fuelSearchCity.js
 
 let newDatasWithPrice;
 
-export async function mixSearchCity(city, threeFuelsData) {
+export async function fuelSearchCity(city) {
   const apiStations = "https://api.prix-carburants.2aaz.fr/stations/?q=";
 
   let fetchDatas = false;
@@ -21,7 +20,7 @@ export async function mixSearchCity(city, threeFuelsData) {
       adress: station.Address.street_line,
       ville: station.Address.city_line,
       name: station.name,
-      Fuels: station.Fuels.filter((fuel) => fuel.id !== 1 && fuel.id !== 4),
+      Fuels: station.Fuels,
     }));
 
     fetchDatas = true;
@@ -29,11 +28,5 @@ export async function mixSearchCity(city, threeFuelsData) {
     return "no datas";
   }
 
-  // Fin du fetch
-  // console.log("LOGS newDatasWithPrice ===> " + city);
-  // console.log(newDatasWithPrice);
-
-  const sortedStations = await blendAndSort(newDatasWithPrice, threeFuelsData);
-
-  return sortedStations;
+  return newDatasWithPrice;
 }

@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { searchFuelByCity } from "../modules/searchFuelByCity";
 import { searchFuelByCoordinates } from "../modules/searchFuelByCoordinates";
+import { fuelSearchCity } from "../modules/fuelSearchCity";
 import { codePostalSearch } from "../modules/codePostalSearch";
 import FuelByPrice from "../components/FuelByPrice";
 
@@ -45,7 +46,7 @@ function FuelSearch() {
         "Aucuns résultats ; result = [] ; Lancement de la recherche par code postal"
       );
       const postCode = await codePostalSearch(inputSearch);
-      const newResult = await searchCity(postCode, threeFuelsData);
+      const newResult = await fuelSearchCity(postCode);
       setStationsData(newResult);
       stationsData && setIsLoading(false);
     } else {
@@ -86,11 +87,13 @@ function FuelSearch() {
 
   const handleSearch = () => {
     searchStations();
+    setCity(null);
   };
 
   const handleKeyPress = async (e) => {
     if (e.key === "Enter") {
       searchStations();
+      setCity(null);
     }
   };
 
@@ -148,9 +151,7 @@ function FuelSearch() {
   return (
     <div data-theme="night">
       <main className="font-nunito flex flex-col items-center justify-center">
-        <h1 className="text-4xl mt-6">
-          Recherche par carburant...en cours de développement
-        </h1>
+        <h1 className="text-4xl mt-6">Recherche par carburant</h1>
         <p className="text-lg mt-2.5">Sélectionnez votre carburant</p>
         <div className="flex mt-2.5">
           <div>
