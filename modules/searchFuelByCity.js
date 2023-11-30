@@ -30,11 +30,5 @@ export async function searchFuelByCity(city) {
     return "no datas";
   }
 
-  // Fin du fetch
-  //console.log("LOGS newDatasWithPrice ===> " + city);
-  //console.log(newDatasWithPrice);
-
-  //const sortedStations = await blendAndSort(newDatasWithPrice, threeFuelsData);
-
   return newDatasWithPrice;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { searchFuelByCity } from "../modules/searchFuelByCity";
+import { searchFuelByCoordinates } from "../modules/searchFuelByCoordinates";
 import { codePostalSearch } from "../modules/codePostalSearch";
 import FuelByPrice from "../components/FuelByPrice";
 
@@ -12,6 +13,15 @@ function FuelSearch() {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    // Cette fonction sera appelée chaque fois que stationsData change
+    console.log("StationsData a changé :", stationsData);
+    //console.log("Etat de isLoading : " + isLoading);
+    setTimeout(() => {
+      setInputSearch(""); // Efface le contenu de l'input
+    }, 500);
+  }, [stationsData]);
 
   useEffect(() => {
     if (latitude && longitude) {
@@ -44,16 +54,6 @@ function FuelSearch() {
     }
   };
 
-  const handleSearch = () => {
-    searchStations();
-  };
-
-  const handleKeyPress = async (e) => {
-    if (e.key === "Enter") {
-      searchStations();
-    }
-  };
-
   const handleGetLocation = async () => {
     try {
       // Récupère la latitude et la longitude à partir du navigateur
@@ -65,20 +65,16 @@ function FuelSearch() {
       setLatitude(position.coords.latitude);
       setLongitude(position.coords.longitude);
 
-      if (!rangeE85) {
-        showModal();
-        setIsLoading(false);
-      } else if (rangeE85 >= 1) {
+      if (position.coords.latitude && position.coords.longitude) {
         // Effectue une recherche de stations avec les coordonnées récupérées
         let searchWithCoordinates;
-        if (position.coords.latitude && position.coords.longitude) {
-          searchWithCoordinates = await searchCoordinates(
-            position.coords.latitude,
-            position.coords.longitude,
-            threeFuelsData
-          );
-          searchWithCoordinates && setStationsData(searchWithCoordinates);
-        }
+
+        searchWithCoordinates = await searchFuelByCoordinates(
+          position.coords.latitude,
+          position.coords.longitude
+        );
+
+        searchWithCoordinates && setStationsData(searchWithCoordinates);
       }
 
       // Définit la valeur de `setIsLoading()` en fonction de la valeur de `stationsData`
@@ -88,7 +84,15 @@ function FuelSearch() {
     }
   };
 
-  // ...
+  const handleSearch = () => {
+    searchStations();
+  };
+
+  const handleKeyPress = async (e) => {
+    if (e.key === "Enter") {
+      searchStations();
+    }
+  };
 
   let stations;
   if (stationsData) {
@@ -263,17 +267,6 @@ function FuelSearch() {
         ) : (
           <div>{stations}</div>
         )}
-        {/* <div>
-          <Modal
-            title="Blend Fuel"
-            onCancel={() => setModalOn(false)}
-            open={modalOn}
-            footer={null}
-          >
-            <h1>La quantité de carburant E85 ne peut être à 0 litre.</h1>
-            <p>Renseignez une quantité de E85 supérieur à 0 litre.</p>
-          </Modal>
-        </div> */}
       </main>
     </div>
   );
