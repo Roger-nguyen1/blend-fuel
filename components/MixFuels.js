@@ -150,7 +150,9 @@ function MixFuels() {
   return (
     <div data-theme="night">
       <main className="font-nunito flex flex-col items-center justify-center">
-        <h1 className="text-4xl mt-6">Welcome to Blend Fuel!</h1>
+        <h1 className="text-3xl text-center mt-6">
+          Recherche avec mélange de carburant E85
+        </h1>
         <div className="my-2 flex flex-col items-center justify-center">
           <p className="text-lg mb-2.5">
             Choisissez la quantité de carburants* :{" "}
